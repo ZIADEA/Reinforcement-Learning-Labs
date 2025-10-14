@@ -1,6 +1,6 @@
 # resultats d une batery de 2000 episodes et 100 test pour chaque algorithme
 avec epsilon=0.05,alpha=0.2,gamma=0.8 dans le medieumclassic world : 
-| scores | Value iteration | Qlearning | Qlearning approxiamtif 4features |
+| scores | Value iteration | Qlearning | Qlearning approxiamtif 4features (bias,of-ghosts-1-step-away,eats-food,closest-food) |
 |---|---|---|---|
 | Average Rewards over all training | impossible | -394.07 | Contenu Ligne 1, Col 3 |
 | Average Rewards for last 100 episodes | impossible | -387.97 | Contenu Ligne 1, Col 3 |
