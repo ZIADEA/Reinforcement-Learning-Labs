@@ -102,3 +102,62 @@ class SimpleExtractor(FeatureExtractor):
         features.divideAll(10.0)
         return features
     
+class MyExtractor(FeatureExtractor):
+    def getFeatures(self, state, action):
+        food = state.getFood()
+        walls = state.getWalls()
+        ghosts = state.getGhostPositions()
+        ghostStates = state.getGhostStates()
+
+        feats = util.Counter()
+
+        # ---- 1) Les 4 features "de base" réécrites ici ----
+        feats["bias"] = 1.0
+
+        x, y = state.getPacmanPosition()
+        dx, dy = Actions.directionToVector(action)
+        nx, ny = int(x + dx), int(y + dy)
+
+        feats["#-of-ghosts-1-step-away"] = sum(
+            (nx, ny) in Actions.getLegalNeighbors((int(gx), int(gy)), walls)
+            for (gx, gy) in ghosts
+        )
+
+        if not feats["#-of-ghosts-1-step-away"] and food[nx][ny]:
+            feats["eats-food"] = 1.0
+
+        dist = closestFood((nx, ny), food, walls)
+        if dist is not None:
+            feats["closest-food"] = float(dist) / (walls.width * walls.height)
+
+        # ---- 2) Tes 4 features ajoutées ----
+        # a) tape un mur
+        feats["hits-wall"] = 1.0 if walls[nx][ny] else 0.0
+
+        # b) se rapproche de la nourriture la plus proche
+        cur_d = closestFood((x, y),  food, walls)
+        nxt_d = closestFood((nx, ny), food, walls)
+        feats["towards-closest-food"] = 1.0 if (cur_d is not None and nxt_d is not None and nxt_d < cur_d) else 0.0
+
+        # c) distance normalisée au fantôme le plus proche
+        if ghosts:
+            dmin = min(abs(nx - int(gx)) + abs(ny - int(gy)) for (gx, gy) in ghosts)
+            feats["ghost-dist"] = float(dmin) / (walls.width + walls.height)
+        else:
+            feats["ghost-dist"] = 1.0
+
+        # d) fantôme apeuré à ≤ 2 pas
+        sg_near = 0.0
+        for (gpos, gs) in zip(ghosts, ghostStates):
+            if gs.scaredTimer > 0:
+                gx, gy = int(gpos[0]), int(gpos[1])
+                if abs(nx - gx) + abs(ny - gy) <= 2:
+                    sg_near = 1.0
+                    break
+        feats["scared-ghost-near"] = sg_near
+
+        # ---- Normalisation unique (ordre de grandeur ~0.1 comme SimpleExtractor) ----
+        feats.divideAll(10.0)
+        return feats
+
+    
