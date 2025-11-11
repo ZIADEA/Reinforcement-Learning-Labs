@@ -27,5 +27,6 @@ GridWorldMoving-v0:
   vf_coef: 0.5
   max_grad_norm: 0.5
 
-
 NB : j ai dfintuner GridWorldMoving sur GridWorldStatic  4X4
+
+voir les log tensorbord dans le directory  et les model fintuner dans  rl-baselines3-zoo\logs\ppo
