@@ -1,0 +1,1 @@
+C:\Python314\python.exe -m rl_zoo3.train --algo ppo --env CartPole-v1 --eval-freq 10000 --save-freq 50000

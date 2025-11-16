@@ -1,0 +1,1 @@
+C:\Users\DJERI\anaconda3\envs\rl_sb\python.exe train.py --algo ppo --env GridWorldMoving-v0 -n 100000 --tensorboard-log logs/ppo_gridworld_finetune/
