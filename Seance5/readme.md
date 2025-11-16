@@ -55,22 +55,31 @@ Dans le dossier du zoo : `rl-baselines3-zoo/`
 
   ```yaml
   GridWorldStatic-v0:
+    n_timesteps: 100000
+    policy: "MlpPolicy"
     n_steps: 256
     batch_size: 64
-    learning_rate: 0.0003
+    n_epochs: 4
     gamma: 0.99
-    gae_lambda: 0.95
-    clip_range: 0.2
+    learning_rate: 3.0e-4
     ent_coef: 0.0
-
+    clip_range: 0.2
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+  
   GridWorldMoving-v0:
+    n_timesteps: 50000          # fine-tuning, moins de pas
+    policy: "MlpPolicy"
     n_steps: 256
     batch_size: 64
-    learning_rate: 0.0003
+    n_epochs: 4
     gamma: 0.99
-    gae_lambda: 0.95
-    clip_range: 0.2
+    learning_rate: 1.0e-4       # LR plus petit pour le fine-tune
     ent_coef: 0.0
+    clip_range: 0.2
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+
   ```
 
   Ces configurations sont automatiquement utilisées par `rl_zoo3.train` lorsqu’on spécifie `--env GridWorldStatic-v0` ou `--env GridWorldMoving-v0`.
