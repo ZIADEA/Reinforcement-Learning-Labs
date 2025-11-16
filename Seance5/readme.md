@@ -1,4 +1,4 @@
-# RL GridWorld + CartPole – PPO, Fine-Tuning et Analyse TensorBoard
+# RL GridWorld + CartPole test – PPO ALGO, Fine-Tuning et Analyse Convergence
 
 Ce dépôt contient une petite étude expérimentale de PPO appliqué à :
 
