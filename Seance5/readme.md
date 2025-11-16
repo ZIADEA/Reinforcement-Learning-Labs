@@ -115,7 +115,7 @@ Logs bruts au format `events.out.tfevents...` :
 
 Un zip global est également présent :  
 `rl-baselines3-zoo/logs/tensorbord.zip`  
-(il contient les logs convertis en CSV pour analyse hors TensorBoard).
+(il contient les logs convertis en CSV pour analyse hors TensorBoard si necessaire).
 
 ### 1.6. GIF des politiques apprises
 
