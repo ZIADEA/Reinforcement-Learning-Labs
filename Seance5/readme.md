@@ -7,7 +7,7 @@ Ce dépôt contient une petite étude expérimentale de PPO appliqué à :
 3. Un cas de **mauvais transfert** (finetuning Moving à partir de Static)
 4. Un environnement de référence **CartPole-v1**
 
-L’implémentation est basée sur **Stable-Baselines3** et **rl-baselines3-zoo**, avec un environnement GridWorld custom et une analyse de convergence via **TensorBoard**.
+L’implémentation est basée sur **Stable-Baselines3** et **rl-baselines3-zoo**, avec un environnement GridWorld precedent accesible a https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/seance2/minegym  custom et une analyse de convergence via **TensorBoard**.
 
 ---
 
