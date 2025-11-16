@@ -201,7 +201,7 @@ python -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0     -n 100000     --
 Résultats :  
 `logs/ppo/GridWorldMoving-v0_1/`
 
-Ici l’agent apprend réellement la stratégie “poursuivre un goal mobile” sans être prisonnier de la politique apprise sur Static.
+Ici l’agent apprend réellement la stratégie “poursuivre un goal mobile” sans être prisonnier de la politique apprise sur Static. On vois que ca reste neanmoins assez dificile pour l agent de s adapter a cause de la variabiliter de l environnement .
 
 ### 3.4. PPO sur CartPole-v1 (référence)
 
@@ -327,7 +327,7 @@ Pour un aperçu rapide, comparer les GIF dans `gridworld_runs/` :
 | Expérience                            | Fichier GIF                                            | Comportement observé |
 |--------------------------------------|--------------------------------------------------------|----------------------|
 | GridWorld Static                     | `gridworld_static_live.gif`                            | L’agent va directement vers le goal fixe. |
-| GridWorld Moving – finetune Static   | `gridworld_moving_live_fintune_sur_gridword_static.gif`| L’agent reste bloqué sur une case, ignore le goal qui bouge. |
+| GridWorld Moving – finetune Static   | `gridworld_moving_live_fintune_sur_gridword_static.gif`| L’agent reste bloqué sur une case la case ou se trouve le goal static , ignore le goal qui bouge. |
 | GridWorld Moving – from scratch      | `gridworld_moving_live.gif`                            | L’agent suit correctement la position du goal mobile. |
 | CartPole-v1                          | `test_cartpole.gif`                                    | Le pendule reste globalement équilibré, le chariot oscille légèrement. |
 
