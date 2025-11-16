@@ -1,1 +1,0 @@
-C:\Users\DJERI\anaconda3\envs\rl_sb\python.exe -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0 -i logs/ppo/GridWorldStatic-v0_1/GridWorldStatic-v0.zip -n 50000 --tensorboard-log logs/ppo_gridworld_finetune/

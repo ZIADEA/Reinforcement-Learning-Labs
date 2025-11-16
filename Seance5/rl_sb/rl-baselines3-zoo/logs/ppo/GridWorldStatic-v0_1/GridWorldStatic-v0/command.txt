@@ -1,1 +1,0 @@
-C:\Users\DJERI\anaconda3\envs\rl_sb\python.exe -m rl_zoo3.train --algo ppo --env GridWorldStatic-v0 -n 100000 --tensorboard-log logs/ppo_gridworld_static/
