@@ -1,14 +1,23 @@
 import os
 import time
-from typing import Any
+import argparse
+from typing import Any, Optional, List
 
 import numpy as np
 import gymnasium as gym
 from stable_baselines3 import PPO
 
+# IMPORTANT : importe ton package pour que les envs soient enregistrés
+import gridworld_env
+
+# Pour l'affichage graphique et l'enregistrement
+import matplotlib.pyplot as plt
+import imageio.v2 as imageio
+import io
+
 
 # ------------------------------------------------------------------
-# Utilitaires pour accéder à ton GridEnv interne et afficher la grille
+# Utilitaires pour accéder à ton GridEnv interne
 # ------------------------------------------------------------------
 
 
@@ -49,40 +58,82 @@ def obs_to_state(obs) -> int:
     return int(obs)
 
 
-def render_ascii(core, state: int):
+# ------------------------------------------------------------------
+# Rendu graphique avec Matplotlib (fond blanc, agent rouge, goal vert)
+# ------------------------------------------------------------------
+
+
+def render_grid_gui(core, state: int, ax):
     """
-    Affiche une grille ASCII :
-      A : agent
-      G : goal
-      X : obstacle
-      . : case vide
+    Affiche la grille dans une fenêtre matplotlib :
+    - fond blanc
+    - obstacles en noir
+    - goals en vert (avec un 'G')
+    - agent en rouge (avec un 'A')
     """
     rows = core.rows
     cols = core.cols
-    goals = set(core.goals)
+    goals = list(core.goals)
     obstacles = set(core.obstacles)
 
-    lines = []
-    for r in range(rows):
-        row_cells = []
-        for c in range(cols):
-            idx = r * cols + c
-            if idx == state:
-                row_cells.append("A")
-            elif idx in goals:
-                row_cells.append("G")
-            elif idx in obstacles:
-                row_cells.append("X")
-            else:
-                row_cells.append(".")
-        lines.append(" ".join(row_cells))
+    # Image RGB : fond blanc
+    img = np.ones((rows, cols, 3), dtype=float)
 
-    print("\n".join(lines))
+    # Obstacles : noir
+    for o in obstacles:
+        r, c = divmod(o, cols)
+        img[r, c] = [0.0, 0.0, 0.0]
+
+    # Goals : vert
+    for g in goals:
+        r, c = divmod(g, cols)
+        img[r, c] = [0.0, 1.0, 0.0]
+
+    # Agent : rouge
+    r_a, c_a = divmod(state, cols)
+    img[r_a, c_a] = [1.0, 0.0, 0.0]
+
+    ax.clear()
+    ax.imshow(img, interpolation="nearest")
+
+    # Grille
+    ax.set_xticks(np.arange(-0.5, cols, 1), minor=True)
+    ax.set_yticks(np.arange(-0.5, rows, 1), minor=True)
+    ax.grid(which="minor", color="black", linewidth=1)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Texte "G" et "A" pour être 100% sûr de ce qu’on regarde
+    for g in goals:
+        r, c = divmod(g, cols)
+        ax.text(
+            c, r, "G",
+            ha="center", va="center",
+            fontsize=16, fontweight="bold",
+        )
+
+    ax.text(
+        c_a, r_a, "A",
+        ha="center", va="center",
+        fontsize=16, fontweight="bold",
+    )
+
+    # Titre avec indices pour debug visuel
+    ax.set_title(f"GridWorld | Agent={state} | Goals={goals}")
 
 
-def clear():
-    """Nettoie l'écran de la console (Windows / Linux)."""
-    os.system("cls" if os.name == "nt" else "clear")
+
+def capture_frame(fig) -> np.ndarray:
+    """
+    Capture la figure matplotlib en image (numpy array H x W x 3),
+    en passant par un buffer PNG en mémoire (compatible avec TkAgg).
+    """
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", bbox_inches="tight")
+    buf.seek(0)
+    img = imageio.imread(buf)
+    buf.close()
+    return img
 
 
 # ------------------------------------------------------------------
@@ -97,6 +148,7 @@ def run_eval(
     max_steps: int = 50,
     sleep: float = 0.3,
     deterministic: bool = True,
+    record_path: Optional[str] = None,
 ):
     print("=" * 80)
     print(f"Chargement du modèle PPO depuis : {model_path}")
@@ -107,20 +159,35 @@ def run_eval(
         print(f"[ERREUR] Le fichier modèle n'existe pas : {model_path}")
         return
 
-    # Chargement du modèle (CPU only par défaut)
+    # Charger le modèle
     model = PPO.load(model_path)
 
-    # Création d'un env gymnasium simple (pas de VecEnv ici)
+    # Créer l’environnement
     env = gym.make(env_id)
 
-    # On récupère ton GridEnv interne pour avoir rows, cols, goals, obstacles
+    # Extraire le GridEnv interne
     try:
         core = extract_core(env)
     except Exception as e:
         print(f"[AVERTISSEMENT] Impossible d'extraire `core` depuis l'env : {e}")
-        print("Le modèle sera quand même exécuté, mais sans rendu ASCII.")
+        print("Le modèle sera quand même exécuté, mais sans rendu graphique ni enregistrement.")
         core = None
 
+    # Préparer la fenêtre matplotlib
+    fig, ax = None, None
+    frames: List[np.ndarray] = []
+
+    if core is not None:
+        plt.ion()
+        fig, ax = plt.subplots()
+        try:
+            fig.canvas.manager.set_window_title(f"Live PPO - {env_id}")
+        except Exception:
+            pass
+
+    # ----------------------------------------------------------------------
+    # Épisodes de test
+    # ----------------------------------------------------------------------
     for ep in range(1, n_episodes + 1):
         obs, info = env.reset()
         done = False
@@ -129,73 +196,95 @@ def run_eval(
         print(f"\n===== Episode {ep} sur {env_id} =====")
 
         if core is not None:
-            clear()
-            print(f"===== Episode {ep} sur {env_id} | état initial =====")
             state = obs_to_state(obs)
-            render_ascii(core, state)
-            print()
+            render_grid_gui(core, state, ax)
+            plt.draw()
+            plt.pause(0.001)
+
+            if record_path is not None:
+                frames.append(capture_frame(fig))
 
         while not done and step < max_steps:
-            # Action proposée par le PPO
             action, _ = model.predict(obs, deterministic=deterministic)
-
-            # Step dans l'environnement
             obs, reward, terminated, truncated, info = env.step(action)
-            done = bool(terminated) or bool(truncated)
+            done = terminated or truncated
             step += 1
 
             if core is not None:
-                clear()
-                print(
-                    f"===== Episode {ep} sur {env_id} | step {step}, "
-                    f"reward {reward:.1f}, done={done} ====="
-                )
                 state = obs_to_state(obs)
-                render_ascii(core, state)
-                print()
-                time.sleep(sleep)
+                render_grid_gui(core, state, ax)
+                plt.draw()
+                plt.pause(sleep)
+
+                if record_path is not None:
+                    frames.append(capture_frame(fig))
+
+            print(f"Step {step} | action={action} | reward={reward:.2f} | done={done}"
+                  f"| goals={core.goals} | agent_state={state}"
+                  )
 
         print(f"Episode {ep} terminé en {step} steps.")
 
     env.close()
 
+    # ----------------------------------------------------------------------
+    # Sauvegarde du GIF
+    # ----------------------------------------------------------------------
+    if core is not None and record_path is not None and len(frames) > 0:
+        out_dir = os.path.dirname(record_path)
+        if out_dir != "":
+            os.makedirs(out_dir, exist_ok=True)
+
+        fps = int(1.0 / max(sleep, 0.01))
+        imageio.mimsave(record_path, frames, fps=fps)
+        print(f"\n[INFO] Animation sauvegardée dans : {record_path}")
+
+    if core is not None and fig is not None:
+        print("Simulation terminée. Ferme la fenêtre matplotlib pour continuer.")
+        plt.ioff()
+        plt.show()
+
 
 # ------------------------------------------------------------------
-# Main : tests statique (4x4) puis moving (4x4, si modèle présent)
+# Main
 # ------------------------------------------------------------------
-
 
 if __name__ == "__main__":
-    # 1) Modèle entraîné sur GridWorldStatic-v0 (ta taille actuelle = 4x4)
-    MODEL_STATIC = "logs/ppo/GridWorldStatic-v0_1/GridWorldStatic-v0.zip"
-
-    # 2) Modèle fine-tuné sur GridWorldMoving-v0 (après ton fine-tuning PPO)
-    #    Adapte le chemin si le dossier a un suffixe différent (_2, etc.).
-    MODEL_MOVING = "logs/ppo/GridWorldMoving-v0_1/GridWorldMoving-v0.zip"
-
-    # Test du PPO sur l'environnement 4x4 avec goal fixe
-    run_eval(
-        model_path=MODEL_STATIC,
-        env_id="GridWorldStatic-v0",
-        n_episodes=3,
-        max_steps=50,
-        sleep=0.3,
-        deterministic=True,
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--mode",
+        choices=["static", "moving", "both"],
+        default="both",
+        help="Choisir l'env à tester : static, moving ou both.",
     )
+    args = parser.parse_args()
 
-    # Test du PPO sur l'environnement 4x4 avec goal moving (si le modèle existe)
-    if os.path.isfile(MODEL_MOVING):
+    ROOT_SAVE_DIR = r"C:\Users\DJERI\VSCODE\Programmation\python\RL-class-propre\rl_sb\gridworld_runs"
+
+    MODEL_STATIC = "logs/ppo/GridWorldStatic-v0_1/best_model.zip"
+    MODEL_MOVING = "logs/ppo/GridWorldMoving-v0_1/best_model.zip"
+
+    SAVE_STATIC = os.path.join(ROOT_SAVE_DIR, "gridworld_static_live.gif")
+    SAVE_MOVING = os.path.join(ROOT_SAVE_DIR, "gridworld_moving_live.gif")
+
+    if args.mode in ["static", "both"]:
+        run_eval(
+            model_path=MODEL_STATIC,
+            env_id="GridWorldStatic-v0",
+            n_episodes=10,
+            max_steps=50,
+            sleep=0.30,
+            deterministic=True,
+            record_path=SAVE_STATIC,
+        )
+
+    if args.mode in ["moving", "both"]:
         run_eval(
             model_path=MODEL_MOVING,
             env_id="GridWorldMoving-v0",
-            n_episodes=3,
+            n_episodes=10,
             max_steps=50,
-            sleep=0.3,
+            sleep=0.30,
             deterministic=True,
-        )
-    else:
-        print(
-            "\n[INFO] Modèle fine-tuné pour GridWorldMoving-v0 introuvable : "
-            f"{MODEL_MOVING}\n"
-            "     → Lance d'abord le fine-tuning PPO, ou adapte le chemin dans ce script."
+            record_path=SAVE_MOVING,
         )
