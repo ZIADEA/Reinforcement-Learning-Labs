@@ -1,8 +1,3 @@
-Voici un README complet, cohérent avec ta structure actuelle, les logs, les modèles, les GIF et les estimations de n.
-Tu peux le copier tel quel dans `rl_sb/readme.md`.
-
----
-
 ````markdown
 # RL GridWorld + CartPole – PPO, Fine-Tuning, Convergence et Analyse des hyperparamètres
 
