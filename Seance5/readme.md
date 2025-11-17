@@ -207,13 +207,13 @@ Tous les GIF sont dans `gridworld_runs/` et sont affichés ci-dessous :
 #### GridWorld Static
 
 **Agent Static – 100k steps**
-![GridWorld static 100k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_static_live.gif?raw=true)
+![GridWorld static 100k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_static_live.gif?raw=true)
 
 **Agent Static – 50k steps**
-![GridWorld static 50k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_static_50k_live.gif?raw=true)
+![GridWorld static 50k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_50k_live.gif?raw=true)
 
 **Agent Static – 400k steps**
-![GridWorld static 400k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_static_400k_live.gif?raw=true)
+![GridWorld static 400k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_400k_live.gif?raw=true)
 
 #### GridWorld Moving
 
@@ -382,7 +382,7 @@ Résultats :
 * Logs RL : `logs/ppo/CartPole-v1_1/`
 * Logs TensorBoard : `logs/test_cartpole_tb/`
 * Modèle global : `../../models/ppo/CartPole-v1/CartPole-v1.zip`
-* GIF : `../../rl_sb/gridworld_runs/gridworld_runs/test_cartpole.gif`
+* GIF : `../../rl_sb/gridworld_runs/test_cartpole.gif`
 
 ---
 
@@ -401,7 +401,7 @@ Par défaut, le script charge :
 * Pour `--mode static` : un modèle PPO sur `GridWorldStatic-v0`
 * Pour `--mode moving` : un modèle PPO sur `GridWorldMoving-v0`
 
-Les GIF générés sont dans `../rl_sb/gridworld_runs/gridworld_runs/` et sont affichés dans la section 1.5 ci-dessus.
+Les GIF générés sont dans `../rl_sb/gridworld_runs/` et sont affichés dans la section 1.5 ci-dessus.
 
 ---
 
