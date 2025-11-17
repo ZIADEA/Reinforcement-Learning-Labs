@@ -1,4 +1,3 @@
-````markdown
 # RL GridWorld + CartPole – PPO, Fine-Tuning, Convergence et Analyse des hyperparamètres
 
 Ce dépôt correspond à une mini-étude expérimentale autour de PPO appliqué à :
@@ -51,7 +50,7 @@ L’installation locale du package se fait avec :
 ```bash
 cd gridworld_env
 pip install -e .
-````
+
 
 ---
 
