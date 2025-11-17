@@ -1,150 +1,236 @@
-# RL GridWorld + CartPole test – PPO ALGO, Fine-Tuning et Analyse Convergence
-
-Ce dépôt contient une petite étude expérimentale de PPO appliqué à :
-
-1. Un environnement **GridWorld statique** (goal fixe)
-2. Un environnement **GridWorld avec goal mobile**
-3. Un cas de **mauvais transfert** (finetuning Moving à partir de Static)
-4. Un environnement de référence **CartPole-v1**
-
-L’implémentation est basée sur **Stable-Baselines3** et **rl-baselines3-zoo**, avec un environnement GridWorld precedent accesible a https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/seance2/minegym  custom et une analyse de convergence via **TensorBoard**.
+Voici un README complet, cohérent avec ta structure actuelle, les logs, les modèles, les GIF et les estimations de n.
+Tu peux le copier tel quel dans `rl_sb/readme.md`.
 
 ---
 
-## 1. Fichiers importants du dépôt
+````markdown
+# RL GridWorld + CartPole – PPO, Fine-Tuning, Convergence et Analyse des hyperparamètres
+
+Ce dépôt correspond à une mini-étude expérimentale autour de PPO appliqué à :
+
+1. Un environnement **GridWorld statique** (`GridWorldStatic-v0`, goal fixe)
+2. Un environnement **GridWorld avec goal mobile** (`GridWorldMoving-v0`)
+3. Un cas de **transfert raté** (finetuning du Moving à partir d’un agent Static déjà entraîné)
+4. Un environnement de référence **CartPole-v1**
+
+L’implémentation repose sur :
+
+- **Stable-Baselines3**
+- **rl-baselines3-zoo**
+- Un environnement GridWorld custom inspiré de la séance 2 du dépôt principal :  
+  https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/seance2/minegym
+
+Une partie importante de l’analyse est faite via **TensorBoard** (convergence des récompenses, longueurs d’épisodes, pertes) et des **GIF** de visualisation qualitative.
+
+Le projet présenté ici se trouve dans :  
+https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb
+
+---
+
+## 1. Structure et fichiers importants
 
 ### 1.1. Environnement GridWorld custom
 
+Chemins locaux (dans ce dépôt) et liens GitHub correspondants :
+
 - `gridworld_env/gridworld_env/grid_core.py`  
-  Logique interne de la grille (indexation, déplacement de l’agent, gestion des goals, récompenses, etc.).
+  Logique interne de la grille (indexation, déplacements, gestion des goals, récompenses).  
+  GitHub :  
+  https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_env/gridworld_env/grid_core.py
 
 - `gridworld_env/gridworld_env/grid_sb3_env.py`  
-  Wrapper Gymnasium / SB3 :
-  - enregistre les environnements `GridWorldStatic-v0` et `GridWorldMoving-v0`
-  - fournit `reset()` / `step()` compatibles rl-baselines3-zoo
-  - convertit l’état en observation entière.
+  Wrapper Gymnasium / SB3 :  
+  - enregistre les environnements `GridWorldStatic-v0` et `GridWorldMoving-v0`  
+  - implémente `reset()` / `step()` compatibles avec **rl-baselines3-zoo**  
+  - convertit l’état de la grille en observation entière.  
+  GitHub :  
+  https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_env/gridworld_env/grid_sb3_env.py
 
 - `gridworld_env/gridworld_env/__init__.py`  
-  Point d’entrée du package `gridworld_env` utilisé par les scripts d’entraînement/test.
+  Point d’entrée du package `gridworld_env`.  
+  GitHub :  
+  https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_env/gridworld_env/__init__.py
 
-### 1.2. Scripts d’entraînement / visualisation
+L’installation locale du package se fait avec :
 
-Dans le dossier du zoo : `rl-baselines3-zoo/`
+```bash
+cd gridworld_env
+pip install -e .
+````
 
-- `rl-baselines3-zoo/train.py`  
+---
+
+### 1.2. Scripts d’entraînement et de visualisation
+
+Tous ces fichiers se trouvent dans `rl-baselines3-zoo/` :
+
+* `rl-baselines3-zoo/train.py`
   Script d’entraînement générique du zoo (appelé via `python -m rl_zoo3.train`).
+  GitHub :
+  [https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/train.py](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/train.py)
 
-- `rl-baselines3-zoo/test_gridworld_ppo.py`  
-  Script maison pour :
-  - charger un modèle PPO sur `GridWorldStatic-v0` ou `GridWorldMoving-v0`
-  - afficher l’agent en live avec Matplotlib (fond blanc, agent rouge, goal vert)
-  - enregistrer des GIF dans `gridworld_runs/`
-  - tracer dans le terminal : action, reward, position de l’agent, position du goal.
+* `rl-baselines3-zoo/test_gridworld_ppo.py`
+  Script maison pour GridWorld :
 
-- `rl-baselines3-zoo/cartpole_sb3_view.py`  
+  * charge un modèle PPO sur `GridWorldStatic-v0` ou `GridWorldMoving-v0`
+  * affiche l’agent en live (Matplotlib, agent rouge, goal vert)
+  * enregistre des GIF dans `gridworld_runs/`
+  * logge dans le terminal : action, récompense, position agent, position goal.
+    GitHub :
+    [https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/test_gridworld_ppo.py](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/test_gridworld_ppo.py)
+
+* `rl-baselines3-zoo/cartpole_sb3_view.py`
   Script maison pour CartPole :
-  - entraîner un PPO simple sur `CartPole-v1`
-  - sauvegarder le modèle
-  - rejouer quelques épisodes en mode `render="human"`.
+
+  * entraîne un PPO sur `CartPole-v1`
+  * sauvegarde le modèle et les logs
+  * rejoue quelques épisodes en mode `render="human"`
+  * génère un GIF dans `gridworld_runs/test_cartpole.gif`.
+    GitHub :
+    [https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/cartpole_sb3_view.py](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/cartpole_sb3_view.py)
+
+---
 
 ### 1.3. Hyperparamètres PPO
 
-- `rl-baselines3-zoo/hyperparams/ppo.yml`  
+Fichier principal (zoo) :
 
-  Fichier modifié pour ajouter des entrées spécifiques :
+* `rl-baselines3-zoo/hyperparams/ppo.yml`
+  GitHub :
+  [https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/hyperparams/ppo.yml](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/rl-baselines3-zoo/hyperparams/ppo.yml)
 
-  ```yaml
-  GridWorldStatic-v0:
-    n_timesteps: 100000
-    policy: "MlpPolicy"
-    n_steps: 256
-    batch_size: 64
-    n_epochs: 4
-    gamma: 0.99
-    learning_rate: 3.0e-4
-    ent_coef: 0.0
-    clip_range: 0.2
-    vf_coef: 0.5
-    max_grad_norm: 0.5
-  
-  GridWorldMoving-v0:
-    n_timesteps: 50000          # fine-tuning, moins de pas
-    policy: "MlpPolicy"
-    n_steps: 256
-    batch_size: 64
-    n_epochs: 4
-    gamma: 0.99
-    learning_rate: 1.0e-4       # LR plus petit pour le fine-tune
-    ent_coef: 0.0
-    clip_range: 0.2
-    vf_coef: 0.5
-    max_grad_norm: 0.5
+Extrait des entrées ajoutées/modifiées :
 
-  ```
+```yaml
+GridWorldStatic-v0:
+  n_timesteps: 100000
+  policy: "MlpPolicy"
+  n_steps: 256
+  batch_size: 64
+  n_epochs: 4
+  gamma: 0.99
+  learning_rate: 3.0e-4
+  ent_coef: 0.0
+  clip_range: 0.2
+  vf_coef: 0.5
+  max_grad_norm: 0.5
 
-  Ces configurations sont automatiquement utilisées par `rl_zoo3.train` lorsqu’on spécifie `--env GridWorldStatic-v0` ou `--env GridWorldMoving-v0`.
+GridWorldMoving-v0:
+  n_timesteps: 50000          # configuration de base, utilisée pour certains runs
+  policy: "MlpPolicy"
+  n_steps: 256
+  batch_size: 64
+  n_epochs: 4
+  gamma: 0.99
+  learning_rate: 1.0e-4       # LR plus petit pour faciliter l'adaptation
+  ent_coef: 0.0
+  clip_range: 0.2
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+```
 
-### 1.4. Modèles entraînés (checkpoints PPO)
+Ces configurations sont automatiquement utilisées par `rl_zoo3.train` quand on passe `--env GridWorldStatic-v0` ou `--env GridWorldMoving-v0`.
 
-Les modèles PPO principaux sont stockés ici :
+---
 
-- Static :  
-  `rl-baselines3-zoo/logs/ppo/GridWorldStatic-v0_1/`  
-  - `best_model.zip`  
-  - `GridWorldStatic-v0.zip`  
-  - `0.monitor.csv`  
-  - `config.yml`, `args.yml`, `command.txt`
+### 1.4. Modèles PPO sauvegardés
 
-- Moving entraîné **directement depuis PPO vierge** :  
+Les modèles principaux se trouvent dans `rl-baselines3-zoo/logs/`.
+
+#### Runs de base (100k + essais finetune)
+
+* Static 100k (run de base) :
+  `rl-baselines3-zoo/logs/ppo/GridWorldStatic-v0_1/`
+  GitHub (dossier) :
+  [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo/GridWorldStatic-v0_1](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo/GridWorldStatic-v0_1)
+
+* Moving 100k (entraînement direct, PPO vierge) :
   `rl-baselines3-zoo/logs/ppo/GridWorldMoving-v0_1/`
+  GitHub :
+  [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo/GridWorldMoving-v0_1](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo/GridWorldMoving-v0_1)
 
-- Moving **finetuné à partir du modèle Static** (cas “raté”) :  
+* Moving finetuné à partir du Static (transfert raté) :
   `rl-baselines3-zoo/logs/ppo/GridWorldMoving-v0_1_fintune_sur_gridword_static/`
+  GitHub :
+  [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo/GridWorldMoving-v0_1_fintune_sur_gridword_static](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo/GridWorldMoving-v0_1_fintune_sur_gridword_static)
 
-- CartPole :  
-  `rl-baselines3-zoo/logs/ppo/CartPole-v1_1/`  
-  Et copie du modèle dans :  
+#### Runs dédiés à l’étude de la convergence (Static)
+
+* Static 50k :
+  `rl-baselines3-zoo/logs/ppo_static_50k/ppo/GridWorldStatic-v0_1/`
+  TensorBoard : `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static_50k/`
+  GitHub :
+
+  * Modèle :
+    [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo_static_50k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo_static_50k)
+  * Logs TB :
+    [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static_50k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static_50k)
+
+* Static 400k :
+  `rl-baselines3-zoo/logs/ppo_static_400k/ppo/GridWorldStatic-v0_1/`
+  TensorBoard : `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static_400k/`
+  GitHub :
+
+  * Modèle :
+    [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo_static_400k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/ppo_static_400k)
+  * Logs TB :
+    [https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static_400k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static_400k)
+
+#### Runs dédiés à l’étude de la convergence (Moving)
+
+* Moving 400k :
+  `rl-baselines3-zoo/logs/ppo_moving_400k/ppo/GridWorldMoving-v0_1/`
+  TensorBoard : `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_moving_400k/`
+
+* Moving 600k :
+  `rl-baselines3-zoo/logs/ppo_moving_600k/ppo/GridWorldMoving-v0_1/`
+  TensorBoard : `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_moving_600k/`
+
+* Moving long (run intermédiaire plus long, non détaillé ici) :
+  `rl-baselines3-zoo/logs/ppo_moving_long/`
+  TensorBoard : `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_moving_long/`
+
+* Moving long2 (run le plus long, environ 1.6M steps) :
+  `rl-baselines3-zoo/logs/ppo_moving_long2/ppo/GridWorldMoving-v0_1/`
+  TensorBoard : `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_moving_long2/`
+
+GitHub (dossier logs Moving) :
+[https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs](https://github.com/ZIADEA/Reinforcement-Learning-Labs/tree/main/Seance5/rl_sb/rl-baselines3-zoo/logs)
+
+#### CartPole
+
+* PPO CartPole-v1 (zoo) :
+  `rl-baselines3-zoo/logs/ppo/CartPole-v1_1/`
+* Copie globale du modèle :
   `models/ppo/CartPole-v1/CartPole-v1.zip`
+  GitHub :
+  [https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/models/ppo/CartPole-v1/CartPole-v1.zip](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/models/ppo/CartPole-v1/CartPole-v1.zip)
 
-### 1.5. Logs TensorBoard
+---
 
-Logs bruts au format `events.out.tfevents...` :
+### 1.5. GIF des politiques apprises
 
-- Static :  
-  `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_static/GridWorldStatic-v0/PPO_1/`
+Tous les GIF sont dans :
 
-- Moving finetuné sur Static :  
-  `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_moving_fintune_sur_gridword_static/GridWorldMoving-v0/PPO_1/`
+* `gridworld_runs/`
 
-- Moving entraîné directement :  
-  `rl-baselines3-zoo/logs/logs_tensorboard_ppo_gridworld_finetune_moving/GridWorldMoving-v0/PPO_1/`
+Et apparaîtront directement dans ce README (GitHub) via :
 
-- CartPole :  
-  `rl-baselines3-zoo/logs/test_cartpole_tb/PPO_1/`
+```markdown
+![GridWorld static – 100k](./gridworld_runs/gridworld_static_live.gif)
+![GridWorld static – 50k](./gridworld_runs/gridworld_ppo_static_50k_live.gif)
+![GridWorld static – 400k](./gridworld_runs/gridworld_ppo_static_400k_live.gif)
 
-Un zip global est également présent :  
-`rl-baselines3-zoo/logs/tensorbord.zip`  
-(il contient les logs convertis en CSV pour analyse hors TensorBoard si necessaire).
+![GridWorld moving – finetune static (transfert raté)](./gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif)
+![GridWorld moving – 100k from scratch](./gridworld_runs/gridworld_moving_live.gif)
+![GridWorld moving – 400k](./gridworld_runs/gridworld_ppo_moving_400k.gif)
+![GridWorld moving – 600k](./gridworld_runs/gridworld_ppo_moving_600k.gif)
+![GridWorld moving – long2 (≈1.6M)](./gridworld_runs/gridworld_movinglong2_live.gif)
 
-### 1.6. GIF des politiques apprises
+![CartPole-v1 – PPO](./gridworld_runs/test_cartpole.gif)
+```
 
-Tous les GIF sont regroupés dans :
-
-- `gridworld_runs/`
-
-Fichiers principaux :
-
-1. `gridworld_static_live.gif`  
-   → Agent PPO sur `GridWorldStatic-v0` (goal fixe)
-
-2. `gridworld_moving_live_fintune_sur_gridword_static.gif`  
-   → Moving finetuné à partir du modèle Static (cas de transfert raté)
-
-3. `gridworld_moving_live.gif`  
-   → Moving entraîné directement sur PPO vierge (cas final correct)
-
-4. `test_cartpole.gif`  
-   → PPO sur CartPole-v1 (référence)
+Ces GIF résument visuellement le comportement des agents dans chaque configuration (voir interprétation plus bas).
 
 ---
 
@@ -152,67 +238,133 @@ Fichiers principaux :
 
 ### 2.1. GridWorldStatic-v0
 
-- Grille 4×4
-- Un seul goal fixe (récompense positive lorsqu’il est atteint)
-- Récompenses typiques :
-  - −1 par step
-  - +30 lorsque le goal est atteint
-- Utilisé comme tâche de base pour initialiser un agent PPO.
+Caractéristiques :
+
+* Grille 4×4
+* Un seul goal fixe
+* L’agent commence dans une position déterminée (ou aléatoire suivant la config)
+* Récompenses typiques :
+
+  * −1 par step
+  * +30 lorsque le goal est atteint
+* Épisodes terminés à la collision avec le goal ou au dépassement d’un nombre maximal de steps.
+
+Tâche simple : apprendre à aller rapidement vers un goal fixe.
 
 ### 2.2. GridWorldMoving-v0
 
-- Même grille 4×4
-- Le goal change de position à chaque step (mouvement aléatoire)
-- Tâche plus difficile : l’agent doit “poursuivre” une cible mobile.
+Caractéristiques :
+
+* Même grille 4×4
+* Le goal change de position à chaque step ou suivant une dynamique aléatoire
+* Même structure de récompense globale (pénalité par step, bonus à l’atteinte du goal)
+
+Tâche plus difficile : l’agent doit **poursuivre une cible mobile** dans un environnement non stationnaire.
 
 ---
 
-## 3. Commandes d’entraînement
+## 3. Commandes d’entraînement (PPO)
 
-Toutes les commandes suivantes se lancent depuis :
+Toutes les commandes ci-dessous se lancent depuis :
 
 ```bash
 cd rl-baselines3-zoo
 ```
 
-### 3.1. PPO sur GridWorldStatic-v0
+### 3.1. GridWorldStatic-v0
 
-Entraînement depuis zéro :
-
-```bash
-python -m rl_zoo3.train --algo ppo --env GridWorldStatic-v0     -n 100000     --tensorboard-log logs/ppo/
-```
-
-Les résultats sont sauvegardés dans :  
-`logs/ppo/GridWorldStatic-v0_1/`
-
-### 3.2. PPO sur GridWorldMoving-v0 – finetune à partir du modèle Static (cas raté)
+#### Static – 50k steps
 
 ```bash
-python -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0     -i logs/ppo/GridWorldStatic-v0_1/GridWorldStatic-v0.zip     -n 50000     --tensorboard-log logs/ppo/
+python -m rl_zoo3.train ^
+  --algo ppo ^
+  --env GridWorldStatic-v0 ^
+  -n 50000 ^
+  -f logs/ppo_static_50k ^
+  --tensorboard-log logs/logs_tensorboard_ppo_gridworld_static_50k/
 ```
 
-Résultats :  
-`logs/ppo/GridWorldMoving-v0_1_fintune_sur_gridword_static/`
+* Modèle et logs RL : `logs/ppo_static_50k/`
+* Logs TensorBoard : `logs/logs_tensorboard_ppo_gridworld_static_50k/`
 
-Remarque :  
-Cette expérience montre un **exemple de transfert qui se passe mal**.  
-L’agent a déjà appris sur Static à “aller au coin 4×4” et garde ce biais, sans réussir à suivre un goal qui bouge.
-
-### 3.3. PPO sur GridWorldMoving-v0 – entraînement direct (cas correct)
-
-Entraînement depuis des poids PPO vierges :
+#### Static – 400k steps
 
 ```bash
-python -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0     -n 100000     --tensorboard-log logs/ppo/
+python -m rl_zoo3.train ^
+  --algo ppo ^
+  --env GridWorldStatic-v0 ^
+  -n 400000 ^
+  -f logs/ppo_static_400k ^
+  --tensorboard-log logs/logs_tensorboard_ppo_gridworld_static_400k/
 ```
 
-Résultats :  
-`logs/ppo/GridWorldMoving-v0_1/`
+* Modèle et logs RL : `logs/ppo_static_400k/`
+* Logs TensorBoard : `logs/logs_tensorboard_ppo_gridworld_static_400k/`
 
-Ici l’agent apprend réellement la stratégie “poursuivre un goal mobile” sans être prisonnier de la politique apprise sur Static. On vois que ca reste neanmoins assez dificile pour l agent de s adapter a cause de la variabiliter de l environnement .
+---
 
-### 3.4. PPO sur CartPole-v1 (référence)
+### 3.2. GridWorldMoving-v0
+
+#### Moving – 400k steps (from scratch)
+
+```bash
+python -m rl_zoo3.train ^
+  --algo ppo ^
+  --env GridWorldMoving-v0 ^
+  -n 400000 ^
+  -f logs/ppo_moving_400k ^
+  --tensorboard-log logs/logs_tensorboard_ppo_gridworld_moving_400k/
+```
+
+#### Moving – 600k steps (from scratch)
+
+```bash
+python -m rl_zoo3.train ^
+  --algo ppo ^
+  --env GridWorldMoving-v0 ^
+  -n 600000 ^
+  -f logs/ppo_moving_600k ^
+  --tensorboard-log logs/logs_tensorboard_ppo_gridworld_moving_600k/
+```
+
+#### Moving – run long (≈ 800k) et long2 (≈ 1.6M)
+
+Même structure, seul `-n` et le préfixe de log changent. Par exemple pour le run très long (long2) :
+
+```bash
+python -m rl_zoo3.train ^
+  --algo ppo ^
+  --env GridWorldMoving-v0 ^
+  -n 1600000 ^
+  -f logs/ppo_moving_long2 ^
+  --tensorboard-log logs/logs_tensorboard_ppo_gridworld_moving_long2/
+```
+
+---
+
+### 3.3. Moving – finetune à partir du modèle Static (transfert raté)
+
+Exemple de transfert qui se passe mal (on part d’un Static déjà convergé) :
+
+```bash
+python -m rl_zoo3.train ^
+  --algo ppo ^
+  --env GridWorldMoving-v0 ^
+  -i logs/ppo/GridWorldStatic-v0_1/GridWorldStatic-v0.zip ^
+  -n 50000 ^
+  --tensorboard-log logs/logs_tensorboard_ppo_gridworld_moving_fintune_sur_gridword_static/
+```
+
+Les résultats sont dans :
+
+* `logs/ppo/GridWorldMoving-v0_1_fintune_sur_gridword_static/`
+* `logs/logs_tensorboard_ppo_gridworld_moving_fintune_sur_gridword_static/`
+
+On observe que l’agent reste bloqué sur une stratégie adaptée au goal fixe et n’apprend pas réellement à suivre un goal mobile.
+
+---
+
+### 3.4. CartPole-v1
 
 Script dédié :
 
@@ -221,148 +373,269 @@ cd rl-baselines3-zoo
 python cartpole_sb3_view.py --algo ppo --timesteps 20000 --episodes 5
 ```
 
-- Sauvegarde des modèles et logs PPO standard dans  
-  `logs/ppo/CartPole-v1_1/`
-- Copie du modèle dans  
-  `models/ppo/CartPole-v1/CartPole-v1.zip`
-- Génération du GIF : `gridworld_runs/test_cartpole.gif`
+Résultats :
+
+* Logs RL : `logs/ppo/CartPole-v1_1/`
+* Logs TensorBoard : `logs/test_cartpole_tb/`
+* Modèle global : `../../models/ppo/CartPole-v1/CartPole-v1.zip`
+* GIF : `../../gridworld_runs/test_cartpole.gif`
 
 ---
 
-## 4. Visualisation des politiques apprises (test + GIF)
+## 4. Visualisation et GIF
 
-Script de test GridWorld :  
-`rl-baselines3-zoo/test_gridworld_ppo.py`
-
-### 4.1. Tester Static
+Script principal :
 
 ```bash
 cd rl-baselines3-zoo
-python test_gridworld_ppo.py --mode static
+python test_gridworld_ppo.py --mode static    # pour tester l'agent static
+python test_gridworld_ppo.py --mode moving   # pour tester l'agent moving
 ```
 
-Utilise par défaut :
+Par défaut, le script charge :
 
-- Modèle : `logs/ppo/GridWorldStatic-v0_1/best_model.zip`
-- Environnement : `GridWorldStatic-v0`
-- GIF généré : `gridworld_runs/gridworld_static_live.gif`
+* Pour `--mode static` : un modèle PPO sur `GridWorldStatic-v0`
+* Pour `--mode moving` : un modèle PPO sur `GridWorldMoving-v0`
 
-### 4.2. Tester Moving finetuné sur Static
+Les GIF générés sont dans `../gridworld_runs/`.
+Dans ce dépôt, ils sont affichés directement :
 
-Modifier le chemin du modèle dans `test_gridworld_ppo.py` si besoin, puis :
+```markdown
+![GridWorld static – 100k](./gridworld_runs/gridworld_static_live.gif)
+![GridWorld static – 50k](./gridworld_runs/gridworld_ppo_static_50k_live.gif)
+![GridWorld static – 400k](./gridworld_runs/gridworld_ppo_static_400k_live.gif)
+
+![GridWorld moving – finetune static](./gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif)
+![GridWorld moving – 100k from scratch](./gridworld_runs/gridworld_moving_live.gif)
+![GridWorld moving – 400k](./gridworld_runs/gridworld_ppo_moving_400k.gif)
+![GridWorld moving – 600k](./gridworld_runs/gridworld_ppo_moving_600k.gif)
+![GridWorld moving – long2 (≈1.6M)](./gridworld_runs/gridworld_movinglong2_live.gif)
+
+![CartPole-v1 – PPO](./gridworld_runs/test_cartpole.gif)
+```
+
+---
+
+## 5. TensorBoard : chemins et commandes
+
+Depuis `rl-baselines3-zoo/` :
+
+### Static
+
+* 50k :
 
 ```bash
-python test_gridworld_ppo.py --mode moving
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_static_50k
 ```
 
-et utiliser :
+* 400k :
 
-- Modèle : `logs/ppo/GridWorldMoving-v0_1_fintune_sur_gridword_static/best_model.zip`
-- GIF : `gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif`
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_static_400k
+```
 
-On observe que l’agent reste souvent bloqué sur une cellule (type 4×4) :  
-il “croit” que le goal est toujours à cet endroit, même s’il bouge.
+* Run de base Static (100k) :
 
-### 4.3. Tester Moving entraîné directement
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_static
+```
 
-Même commande, mais modèle :
+### Moving
 
-- `logs/ppo/GridWorldMoving-v0_1/best_model.zip`
-- GIF : `gridworld_runs/gridworld_moving_live.gif`
+* 400k :
 
-Cette fois l’agent suit correctement la position du goal mobile dans la grille.
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_moving_400k
+```
 
----
+* 600k :
 
-## 5. Interprétation de la convergence (TensorBoard)
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_moving_600k
+```
 
-Les fichiers TensorBoard se trouvent dans :
+* Long (≈ 800k) :
 
-- Static : `logs/logs_tensorboard_ppo_gridworld_static/...`
-- Moving finetune sur Static : `logs/logs_tensorboard_ppo_gridworld_moving_fintune_sur_gridword_static/...`
-- Moving from scratch : `logs/logs_tensorboard_ppo_gridworld_finetune_moving/...`
-- CartPole : `logs/test_cartpole_tb/...`
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_moving_long
+```
 
-Les scalaires principaux analysés sont :
+* Long2 (≈ 1.6M) :
 
-- `rollout/ep_rew_mean` (récompense moyenne)
-- `rollout/ep_len_mean` (longueur d’épisode moyenne)
-- `train/value_loss`
-- `train/policy_gradient_loss`
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_moving_long2
+```
 
-### 5.1. GridWorldStatic-v0
+### Moving finetune Static
 
-- La récompense moyenne augmente rapidement puis se stabilise :
-  l’agent atteint le goal en quelques dizaines de steps.
-- La valeur moyenne des épisodes devient stable : bonne estimation de la fonction de valeur.
-- Le `value_loss` diminue puis oscille sur une plage basse.
+```bash
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_moving_fintune_sur_gridword_static
+```
 
-Conclusion :  
-**Convergence rapide et propre** sur la tâche simple (goal fixe).
+### CartPole
 
-### 5.2. GridWorldMoving – finetune sur Static
-
-- La récompense moyenne reste relativement faible ; les épisodes sont longs.
-- On observe un `value_loss` qui fluctue sans trouver de vrai plateau.
-- Le `policy_gradient_loss` est faible : l’agent ne modifie presque plus sa politique.
-
-Interprétation :  
-L’agent est **piégé par la politique apprise sur Static**.  
-Pour lui, la bonne stratégie reste “aller au coin où se trouvait le goal fixe”, même si le goal bouge.  
-Le finetuning part d’un optimum local qui n’est plus pertinent → convergence très mauvaise.
-
-### 5.3. GridWorldMoving – entraînement direct
-
-- La récompense moyenne augmente progressivement puis se stabilise à un niveau clairement supérieur au cas finetune.
-- La longueur moyenne des épisodes diminue : l’agent trouve le goal plus vite.
-- Les courbes de `value_loss` et `policy_gradient_loss` deviennent stables après une phase transitoire.
-
-Interprétation :  
-En partant d’un PPO **vierge**, l’agent apprend vraiment la stratégie de poursuite d’un goal mobile.  
-On obtient une **convergence correcte, sans biais hérité de Static**.
-
-### 5.4. CartPole-v1
-
-- Convergence très rapide vers des récompenses proches du max.
-- Épisodes très longs (souvent terminés par le time-limit et non par chute du pendule).
-- Courbes stables, comportement attendu pour un PPO standard.
+```bash
+tensorboard --logdir logs/test_cartpole_tb
+```
 
 ---
 
-## 6. Comparaison qualitative (GIF)
+## 6. Courbes de convergence (PNG)
 
-Pour un aperçu rapide, comparer les GIF dans `gridworld_runs/` :
+Les figures suivantes ont été générées à partir des logs TensorBoard convertis en CSV, puis tracées en Python.
+Elles sont stockées dans le dossier :
 
-| Expérience                            | Fichier GIF                                            | Comportement observé |
-|--------------------------------------|--------------------------------------------------------|----------------------|
-| GridWorld Static                     | `gridworld_static_live.gif`                            | L’agent va directement vers le goal fixe. |
-| GridWorld Moving – finetune Static   | `gridworld_moving_live_fintune_sur_gridword_static.gif`| L’agent reste bloqué sur une case la case ou se trouve le goal static , ignore le goal qui bouge. |
-| GridWorld Moving – from scratch      | `gridworld_moving_live.gif`                            | L’agent suit correctement la position du goal mobile. |
-| CartPole-v1                          | `test_cartpole.gif`                                    | Le pendule reste globalement équilibré, le chariot oscille légèrement. |
+* `images/`
+
+et référencées ci-dessous (adapter le nom exact si besoin) :
+
+```markdown
+![Static – 50k vs 400k – ep_rew_mean](./images/static_50k_400k_ep_rew_mean.png)
+![Static – 50k vs 400k – ep_len_mean](./images/static_50k_400k_ep_len_mean.png)
+
+![Moving – 400k vs 600k vs 1.6M – ep_rew_mean](./images/moving_400k_600k_1600k_ep_rew_mean.png)
+![Moving – 400k vs 600k vs 1.6M – ep_len_mean](./images/moving_400k_600k_1600k_ep_len_mean.png)
+```
 
 ---
 
-## 7. Reproduction rapide
+## 7. Interprétation des résultats et estimation de n minimal
 
-Résumé minimal pour rejouer les expériences :
+### 7.1. GridWorldStatic-v0
+
+Observations sur les courbes (50k, 100k, 400k) :
+
+* `rollout/ep_rew_mean` :
+
+  * dès 50k steps, la récompense moyenne est déjà élevée et assez stable ;
+  * passer à 100k puis 400k ne change presque pas la politique apprise : on gagne surtout en robustesse et en stabilité statistique.
+* `rollout/ep_len_mean` :
+
+  * les épisodes deviennent rapidement courts (l’agent atteint vite le goal) ;
+  * les courbes se stabilisent rapidement.
+* `train/value_loss` :
+
+  * forte baisse au début, puis oscillations sur une plage basse dès 50k ;
+  * les runs plus longs ne corrigent plus grand-chose, ils affinent un optimum déjà très bon.
+
+Conclusion pour Static :
+
+* La tâche est simple, l’agent trouve un bon comportement très vite.
+* **50k steps sont déjà suffisants pour une politique raisonnable.**
+* L’entraînement à 100k ou 400k sert surtout à lisser la variance des performances.
+
+Résumé Static :
+
+* **n minimal (politique utilisable)** : ≈ 50 000 steps
+* **n recommandé (confort, convergence nette)** : entre 100 000 et 400 000 steps
+
+---
+
+### 7.2. GridWorldMoving-v0 (from scratch)
+
+Sur les runs 400k, 600k et 1.6M (long2), on observe :
+
+* À 400k :
+
+  * `ep_rew_mean` progresse mais reste encore assez fluctuante ;
+  * `ep_len_mean` est encore variable, les épisodes ne sont pas systématiquement courts ;
+  * `value_loss` et `policy_gradient_loss` n’ont pas de vrai plateau stable.
+* À 600k :
+
+  * les courbes s’améliorent, la récompense moyenne est plus haute ;
+  * la variance reste importante, les épisodes sont plus courts mais pas parfaitement stables ;
+  * on voit que l’agent a appris une stratégie de poursuite, mais encore un peu fragile.
+* À 1.6M (long2) :
+
+  * `ep_rew_mean` atteint un plateau plus clair, avec des oscillations plus contenues ;
+  * `ep_len_mean` se stabilise : l’agent atteint la cible mobile plus rapidement et de façon plus régulière ;
+  * `value_loss` et `policy_gradient_loss` montrent un régime stationnaire raisonnable.
+
+Conclusion pour Moving :
+
+* L’environnement est non stationnaire (goal mobile), donc plus difficile.
+* Les runs à 400k et même 600k montrent encore une **convergence incomplète**.
+* Le run très long (≈ 1.6M) donne une image plus proche d’une convergence robuste.
+
+Résumé Moving :
+
+* **n minimal (politique correcte mais encore un peu fragile)** : ≈ 600 000 steps
+* **n recommandé (convergence claire et comportement stable)** : ≈ 1 600 000 steps
+
+---
+
+### 7.3. Moving – finetune à partir de Static (transfert raté)
+
+Sur le run finetune :
+
+* `ep_rew_mean` reste assez basse et ne s’améliore presque pas ;
+* l’agent adopte un comportement rigide et ne suit pas la cible mobile ;
+* visuellement, le GIF montre que l’agent reste bloqué sur une case proche de l’ancienne position du goal fixe.
+
+Interprétation :
+
+* L’agent a appris une politique trop spécialisée sur le Static (goal fixe).
+* Le finetune ne parvient pas à casser ce biais ; on reste dans un **mauvais optimum local**.
+* Dans ce cas, il est plus efficace d’**entraî
+
+ner l’agent Moving from scratch** plutôt que de partir d’un Static déjà convergé.
+
+---
+
+### 7.4. CartPole-v1
+
+CartPole sert de référence de PPO sur une tâche classique :
+
+* Convergence rapide de `ep_rew_mean` vers des valeurs proches du maximum ;
+* `ep_len_mean` montre des épisodes très longs (souvent stoppés par la limite de temps) ;
+* Comportement du GIF conforme : le pendule reste essentiellement en position verticale, avec des oscillations contrôlées du chariot.
+
+---
+
+## 8. Tableau récapitulatif des expériences
+
+### 8.1. Entraînements et n recommandés
+
+| Environnement      | Type d’expérience      | n (steps) typiques dans ce dépôt | Observations                          | n minimal raisonnable | n recommandé   |
+| ------------------ | ---------------------- | -------------------------------- | ------------------------------------- | --------------------- | -------------- |
+| GridWorldStatic-v0 | PPO from scratch       | 50k, 100k, 400k                  | Convergence très rapide, tâche simple | ≈ 50k                 | 100k–400k      |
+| GridWorldMoving-v0 | PPO from scratch       | 100k, 400k, 600k, 1.6M           | Plus lent, non stationnaire           | ≈ 600k                | ≈ 1.6M         |
+| GridWorldMoving-v0 | Finetune depuis Static | 50k                              | Transfert raté, politique biaisée     | Non recommandé        | Non recommandé |
+| CartPole-v1        | PPO from scratch       | 20k (script dédié)               | Convergence très rapide               | ≈ 20k                 | 20k–50k        |
+
+---
+
+## 9. Reproduction rapide des expériences principales
+
+Résumé minimal :
 
 ```bash
 # 1. Se placer dans le dossier du zoo
 cd rl-baselines3-zoo
 
-# 2. Entraîner GridWorld static
-python -m rl_zoo3.train --algo ppo --env GridWorldStatic-v0 -n 100000 --tensorboard-log logs/ppo/
+# 2. Entraîner GridWorld Static – 50k
+python -m rl_zoo3.train --algo ppo --env GridWorldStatic-v0 -n 50000 -f logs/ppo_static_50k --tensorboard-log logs/logs_tensorboard_ppo_gridworld_static_50k/
 
-# 3. Entraîner GridWorld moving (version "correcte")
-python -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0 -n 100000 --tensorboard-log logs/ppo/
+# 3. Entraîner GridWorld Static – 400k
+python -m rl_zoo3.train --algo ppo --env GridWorldStatic-v0 -n 400000 -f logs/ppo_static_400k --tensorboard-log logs/logs_tensorboard_ppo_gridworld_static_400k/
 
-# 4. Visualiser et générer les GIF
-python test_gridworld_ppo.py --mode both
+# 4. Entraîner GridWorld Moving – 600k (from scratch)
+python -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0 -n 600000 -f logs/ppo_moving_600k --tensorboard-log logs/logs_tensorboard_ppo_gridworld_moving_600k/
 
-# 5. Entraîner et visualiser CartPole
+# 5. Entraîner GridWorld Moving – run long (par exemple 1.6M)
+python -m rl_zoo3.train --algo ppo --env GridWorldMoving-v0 -n 1600000 -f logs/ppo_moving_long2 --tensorboard-log logs/logs_tensorboard_ppo_gridworld_moving_long2/
+
+# 6. Visualiser les politiques apprises et générer les GIF
+python test_gridworld_ppo.py --mode static
+python test_gridworld_ppo.py --mode moving
+
+# 7. Lancer TensorBoard (exemple)
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_static_50k
+tensorboard --logdir logs/logs_tensorboard_ppo_gridworld_moving_600k
+
+# 8. Entraîner et visualiser CartPole
 python cartpole_sb3_view.py --algo ppo --timesteps 20000 --episodes 5
 ```
 
----
-
-Ce README se concentre uniquement sur les fichiers et dossiers utiles à la compréhension des expériences menées (GridWorld static, GridWorld moving, finetuning, CartPole, TensorBoard et GIF).  
+```
+```
