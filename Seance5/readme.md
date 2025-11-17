@@ -470,7 +470,7 @@ Elles sont stockées dans le dossier `images/` :
 ### GridWorld Static – Comparaison 50k vs 400k
 
 **Récompense moyenne par épisode**
-![Static ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/images/static_50k_400k_ep_rew_mean.png?raw=true)
+![Static ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/gridworld_moving_400k_ep_rew_mean.png)
 
 **Longueur moyenne d'épisode**
 ![Static ep_len_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/images/static_50k_400k_ep_len_mean.png?raw=true)
