@@ -218,24 +218,24 @@ Tous les GIF sont dans `gridworld_runs/` et sont affichés ci-dessous :
 #### GridWorld Moving
 
 **Agent Moving – Finetune depuis Static (transfert raté)**
-![GridWorld moving finetune](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif?raw=true)
+![GridWorld moving finetune](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif?raw=true)
 
 **Agent Moving – 100k steps from scratch**
-![GridWorld moving 100k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_moving_live.gif?raw=true)
+![GridWorld moving 100k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_moving_live.gif?raw=true)
 
 **Agent Moving – 400k steps**
-![GridWorld moving 400k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_moving_400k.gif?raw=true)
+![GridWorld moving 400k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_ppo_moving_400k.gif?raw=true)
 
 **Agent Moving – 600k steps**
-![GridWorld moving 600k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_moving_600k.gif?raw=true)
+![GridWorld moving 600k](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_ppo_moving_600k.gif?raw=true)
 
 **Agent Moving – Long2 (≈1.6M steps)**
-![GridWorld moving long2](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/gridworld_movinglong2_live.gif?raw=true)
+![GridWorld moving long2](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_movinglong2_live.gif?raw=true)
 
 #### CartPole
 
 **Agent CartPole-v1 – PPO**
-![CartPole PPO](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/gridworld_runs/test_cartpole.gif?raw=true)
+![CartPole PPO](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/gridworld_runs/test_cartpole.gif?raw=true)
 
 ---
 
@@ -470,7 +470,7 @@ Elles sont stockées dans le dossier `images/` :
 ### GridWorld Static – Comparaison 50k vs 400k
 
 **Récompense moyenne par épisode**
-![Static ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/gridworld_moving_400k_ep_rew_mean.png)
+![Static ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/static_50k_400k_ep_rew_mean.png?raw=true)
 
 **Longueur moyenne d'épisode**
 ![Static ep_len_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/images/static_50k_400k_ep_len_mean.png?raw=true)
