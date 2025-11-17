@@ -211,17 +211,17 @@ Tous les GIF sont dans :
 Et apparaîtront directement dans ce README (GitHub) via :
 
 ```markdown
-![GridWorld static – 100k](./gridworld_runs/gridworld_static_live.gif)
-![GridWorld static – 50k](./gridworld_runs/gridworld_ppo_static_50k_live.gif)
-![GridWorld static – 400k](./gridworld_runs/gridworld_ppo_static_400k_live.gif)
+![GridWorld static – 100k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_static_live.gif)
+![GridWorld static – 50k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_static_50k_live.gif)
+![GridWorld static – 400k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_static_400k_live.gif)
 
-![GridWorld moving – finetune static (transfert raté)](./gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif)
-![GridWorld moving – 100k from scratch](./gridworld_runs/gridworld_moving_live.gif)
-![GridWorld moving – 400k](./gridworld_runs/gridworld_ppo_moving_400k.gif)
-![GridWorld moving – 600k](./gridworld_runs/gridworld_ppo_moving_600k.gif)
-![GridWorld moving – long2 (≈1.6M)](./gridworld_runs/gridworld_movinglong2_live.gif)
+![GridWorld moving – finetune static (transfert raté)](./rl_sb/gridworld_runs/gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif)
+![GridWorld moving – 100k from scratch](./rl_sb/gridworld_runs/gridworld_runs/gridworld_moving_live.gif)
+![GridWorld moving – 400k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_moving_400k.gif)
+![GridWorld moving – 600k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_moving_600k.gif)
+![GridWorld moving – long2 (≈1.6M)](./rl_sb/gridworld_runs/gridworld_runs/gridworld_movinglong2_live.gif)
 
-![CartPole-v1 – PPO](./gridworld_runs/test_cartpole.gif)
+![CartPole-v1 – PPO](./rl_sb/gridworld_runs/gridworld_runs/test_cartpole.gif)
 ```
 
 Ces GIF résument visuellement le comportement des agents dans chaque configuration (voir interprétation plus bas).
@@ -372,7 +372,7 @@ Résultats :
 * Logs RL : `logs/ppo/CartPole-v1_1/`
 * Logs TensorBoard : `logs/test_cartpole_tb/`
 * Modèle global : `../../models/ppo/CartPole-v1/CartPole-v1.zip`
-* GIF : `../../gridworld_runs/test_cartpole.gif`
+* GIF : `../../rl_sb/gridworld_runs/gridworld_runs/test_cartpole.gif`
 
 ---
 
@@ -391,21 +391,21 @@ Par défaut, le script charge :
 * Pour `--mode static` : un modèle PPO sur `GridWorldStatic-v0`
 * Pour `--mode moving` : un modèle PPO sur `GridWorldMoving-v0`
 
-Les GIF générés sont dans `../gridworld_runs/`.
+Les GIF générés sont dans `../rl_sb/gridworld_runs/gridworld_runs/`.
 Dans ce dépôt, ils sont affichés directement :
 
 ```markdown
-![GridWorld static – 100k](./gridworld_runs/gridworld_static_live.gif)
-![GridWorld static – 50k](./gridworld_runs/gridworld_ppo_static_50k_live.gif)
-![GridWorld static – 400k](./gridworld_runs/gridworld_ppo_static_400k_live.gif)
+![GridWorld static – 100k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_static_live.gif)
+![GridWorld static – 50k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_static_50k_live.gif)
+![GridWorld static – 400k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_static_400k_live.gif)
 
-![GridWorld moving – finetune static](./gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif)
-![GridWorld moving – 100k from scratch](./gridworld_runs/gridworld_moving_live.gif)
-![GridWorld moving – 400k](./gridworld_runs/gridworld_ppo_moving_400k.gif)
-![GridWorld moving – 600k](./gridworld_runs/gridworld_ppo_moving_600k.gif)
-![GridWorld moving – long2 (≈1.6M)](./gridworld_runs/gridworld_movinglong2_live.gif)
+![GridWorld moving – finetune static](./rl_sb/gridworld_runs/gridworld_runs/gridworld_moving_live_fintune_sur_gridword_static.gif)
+![GridWorld moving – 100k from scratch](./rl_sb/gridworld_runs/gridworld_runs/gridworld_moving_live.gif)
+![GridWorld moving – 400k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_moving_400k.gif)
+![GridWorld moving – 600k](./rl_sb/gridworld_runs/gridworld_runs/gridworld_ppo_moving_600k.gif)
+![GridWorld moving – long2 (≈1.6M)](./rl_sb/gridworld_runs/gridworld_runs/gridworld_movinglong2_live.gif)
 
-![CartPole-v1 – PPO](./gridworld_runs/test_cartpole.gif)
+![CartPole-v1 – PPO](./rl_sb/gridworld_runs/gridworld_runs/test_cartpole.gif)
 ```
 
 ---
