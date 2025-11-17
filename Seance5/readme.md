@@ -473,15 +473,15 @@ Elles sont stockées dans le dossier `images/` :
 ![Static ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/static_50k_400k_ep_rew_mean.png?raw=true)
 
 **Longueur moyenne d'épisode**
-![Static ep_len_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/images/static_50k_400k_ep_len_mean.png?raw=true)
+![Static ep_len_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/static_50k_400k_ep_len_mean.png?raw=true)
 
 ### GridWorld Moving – Comparaison 400k vs 600k vs 1.6M
 
 **Récompense moyenne par épisode**
-![Moving ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/images/moving_400k_600k_1600k_ep_rew_mean.png?raw=true)
+![Moving ep_rew_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/moving_400k_600k_1600k_ep_rew_mean.png?raw=true)
 
 **Longueur moyenne d'épisode**
-![Moving ep_len_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/rl_sb/images/moving_400k_600k_1600k_ep_len_mean.png?raw=true)
+![Moving ep_len_mean](https://github.com/ZIADEA/Reinforcement-Learning-Labs/blob/main/Seance5/images/moving_400k_600k_1600k_ep_len_mean.png?raw=true)
 
 ---
 
