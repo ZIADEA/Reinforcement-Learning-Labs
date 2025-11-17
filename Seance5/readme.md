@@ -1,4 +1,4 @@
-# RL GridWorld + CartPole – PPO, Fine-Tuning, Convergence et Analyse des hyperparamètres
+# RL GridWorld + test CartPole – PPO, Fine-Tuning, Convergence et Analyse des hyperparamètres
 
 Ce dépôt correspond à une mini-étude expérimentale autour de PPO appliqué à :
 
