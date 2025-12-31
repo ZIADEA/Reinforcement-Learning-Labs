@@ -1,9 +1,61 @@
+<div align="center">
+
+# 🤖 Expérience DQN Flexible
+## Comparaison Naïf vs DQN Complet
+
+![DQN](https://img.shields.io/badge/Deep_Q--Network-Complete-red?style=for-the-badge)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=for-the-badge)
+![Linear](https://img.shields.io/badge/Baseline-Linear-blue?style=for-the-badge)
+
+</div>
+
+---
 Voici un **README.md** complet, rédigé “comme moi”, avec tous les détails pratiques, mes choix imposés (récompenses, protocole de comparaison), et les explications techniques de l’agent.
 
 ---
 
-# README — Expérience flexible (NAÏF ↔ DQN) sur GridWorld
+## 🎯 Résumé
 
+<table>
+<tr>
+<td width="50%">
+
+### 🔬 **Étude de Comparaison**
+- 🟦 **NAÏF (Linéaire)** : Pas de replay, pas de réseau cible
+- 🟥 **DQN (Complet)** : Replay buffer complet + réseau cible
+- ⚖️ **Protocole équitable** : Mêmes épisodes, mêmes récompenses, même seed
+
+</td>
+<td width="50%">
+
+### 💾 **Sorties**
+- 📁 `figures/flex_<mode>_<lin|mlp>/`
+- 📊 Courbes de perte, graphiques de récompense, tableaux de bord
+- 🎯 `checkpoints/flex_<mode>/`
+
+</td>
+</tr>
+</table>
+
+> **💡 Référence Rapide :** Section 4 pour les commandes de lancement | Section 8 décrit toutes les sorties
+
+## 🚀 Résumé Démarrage Rapide
+
+```mermaid
+graph LR
+    A[📦 Installer deps] --> B[▶️ Lancer NAÏF]
+    A --> C[▶️ Lancer DQN]
+    B --> D[📈 Analyser résultats]
+    C --> D
+```
+
+1. **📦 Installer** Python 3.9+ + `numpy`, `matplotlib`, `torch`, `pillow`, `imageio` (section 2)
+2. **▶️ Lancer** le mode naïf ou DQN via les commandes de la section 4
+3. **📈 Analyser** les figures CSV et checkpoints décrits dans la section 8
+
+---
+
+# README — Expérience flexible (NAÏF ↔ DQN) sur GridWorld
 Ce projet me permet de comparer proprement **deux variantes** sur un même code :
 
 * **NAÏF** : pas de replay buffer, pas de target network, une seule tête *online* mise à jour à chaque transition.
