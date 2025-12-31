@@ -3,20 +3,6 @@
 <!-- Bannière animée avec gradient -->
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Reinforcement%20Learning%20%26%20Deep%20RL%20Labs&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Portfolio%202025%20-%20Winter%20Semester&descAlignY=51&descAlign=50"/>
 
-<br/>
-
-<!-- Logo ENSAM Meknès -->
-<img src="https://www.ensam.ac.ma/sites/default/files/inline-images/logo-ensam-meknes.png" alt="ENSAM Meknès" height="100"/>
-
-<br/>
-
-<p align="center">
-<img src="https://img.shields.io/badge/🎓-ENSAM_Meknès-8B0000?style=for-the-badge&labelColor=1a1a1a"/>
-<img src="https://img.shields.io/badge/Semestre-Hiver_2025-gold?style=for-the-badge"/>
-</p>
-
-<br/>
-
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![Gymnasium](https://img.shields.io/badge/Gymnasium-0.29-00A67E?style=for-the-badge)
@@ -533,5 +519,4 @@ graph LR
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer"/>
 
 </div>
-
 
