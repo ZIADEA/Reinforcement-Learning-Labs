@@ -1,10 +1,8 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Reinforcement%20Learning%20%26%20Deep%20RL%20Labs&fontSize=40&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=Portfolio%202025%20-%20Winter%20Semester&descAlignY=52&descAlign=50"/>
+![Uploading image.png…]()
 
-<br/>
 
-<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4f/Logo_Arts_et_M%C3%A9tiers_ParisTech.svg/1200px-Logo_Arts_et_M%C3%A9tiers_ParisTech.svg.png" alt="ENSAM Meknès" height="80"/>
 
 <br/><br/>
 
