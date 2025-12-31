@@ -1,55 +1,287 @@
-# Reinforcement Learning & Deep RL Labs — Portfolio 2025
+<div align="center">
 
-> Collection of the homework, labs, and experiments that document everything I built for the Reinforcement Learning and Deep Reinforcement Learning course (Winter 2025). This repository is organized by séances so that the professor can follow the story of the course, re-run the key experiments, and inspect the analysis artifacts that accompany each delivery.
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Reinforcement%20Learning%20%26%20Deep%20RL%20Labs&fontSize=40&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=Portfolio%202025%20-%20Winter%20Semester&descAlignY=52&descAlign=50"/>
 
-## Highlights
+<br/>
 
-- **Structured history**: each `seance` folder contains the code, experiment scripts, figures, and results described in the accompanying README.
-- **Core techniques covered**: from classical dynamic programming, Monte Carlo, and Q-Learning (seance1) to DQN variants (seance2 & seance4) and PPO experiments with Stable Baselines3 (Seance5).
-- **Visual storytelling**: GIFs/figures live in `Sceance4/minegym/figures` and `Seance5/rl_sb/gridworld_runs` so you can inspect agent behaviours without running anything.
+<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4f/Logo_Arts_et_M%C3%A9tiers_ParisTech.svg/1200px-Logo_Arts_et_M%C3%A9tiers_ParisTech.svg.png" alt="ENSAM Meknès" height="80"/>
 
-## Quick start
+<br/><br/>
 
-1. **Activate the Python environment.**
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Gymnasium](https://img.shields.io/badge/Gymnasium-0.29-00A67E?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
 
-```
+<br/>
+
+**Collection de devoirs, labs et expériences documentant mon cours en Reinforcement Learning et Deep RL**  
+**École Nationale Supérieure des Arts et Métiers - Meknès**
+
+</div>
+
+<br/>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+## ✨ Points Forts
+
+- **Historique structuré** : chaque dossier `seance` contient le code, scripts d'expériences, figures et résultats
+- **Techniques couvertes** : de la programmation dynamique classique, Monte Carlo et Q-Learning jusqu'aux variantes DQN et expériences PPO
+- **Narration visuelle** : GIFs et figures disponibles pour inspecter le comportement des agents sans exécuter le code
+
+## 🚀 Démarrage Rapide
+
+<details open>
+<summary><b>⚙️ 1. Activer l'environnement Python</b></summary>
+
+```powershell
 & C:\Users\DJERI\VSCODE\Programmation\python\environnements\rl_venv\Scripts\Activate.ps1
 ```
+</details>
 
-2. **Navigate to the session you want to inspect.**
+<details>
+<summary><b>📂 2. Naviguer vers la séance souhaitée</b></summary>
 
-- `cd seance1` for the foundational deliverables (MC, DP, PI, VI, Q-Learning agents).
-- `cd seance2` or `cd Sceance4/minegym` for the GridWorld experiments and DQN implementations.
-- `cd Seance5/rl_sb` for the PPO + Stable Baselines3 study.
+| Séance | Commande | Contenu |
+|--------|----------|----------|
+| 📚 Seance 1 | `cd seance1` | Fondamentaux RL (MC, DP, PI, VI, Q-Learning) |
+| 🎮 Seance 2 | `cd seance2` | GridWorld & Q-Learning |
+| 🤖 Seance 4 | `cd Sceance4/minegym` | DQN & comparaisons |
+| 🚀 Seance 5 | `cd Seance5/rl_sb` | PPO + Stable-Baselines3 |
 
-3. **Re-run signature experiments.**
+</details>
 
-- `python -m minegym.experiments.liveQL`
-- `python -m minegym.experiments.sensitivity_gammaQL`
-- `python -m minegym.experiments.sensitivity_grid_sizeQL`
-- `cd Seance5/rl_sb` and execute the `rl-baselines3-zoo` training or visualization scripts listed in `Seance5/readme.md`.
+<details>
+<summary><b>▶️ 3. Lancer les expériences</b></summary>
 
-## Sessions at a glance
+```bash
+# Expériences GridWorld Q-Learning
+python -m minegym.experiments.liveQL
+python -m minegym.experiments.sensitivity_gammaQL
+python -m minegym.experiments.sensitivity_grid_sizeQL
 
-| Session | Focus | Key artifacts |
-| --- | --- | --- |
-| [seance1](seance1) | Basic reinforcement learning building blocks (Monte Carlo, dynamic programming, policy iteration, value iteration, tabular Q-Learning). | Deliverables such as `seance1/Liverable_2_DJERI-ALASSANI_OUBENOUPOU/agentQL.py` plus the entry scripts. |
-| [seance2](seance2/minegym) | Parameterizable GridWorld + Q-Learning diagnostics (`liveQL`, `sensitivity_gammaQL`, `sensitivity_grid_sizeQL`). | See `seance2/minegym/README.md` for walkthroughs, reward conventions, and the corrected update with `w`. |
-| [Sceance4](Sceance4/minegym) | Flexible GridWorld, corrected Q-Learning, and naïve vs DQN comparisons. | `Sceance4/minegym/README.md` and `Sceance4/minegym/DQNReadme.md` describe the experiments, CLI options, and plots. |
-| [Seance5](Seance5) | PPO study with Stable-Baselines3 + rl-baselines3-zoo, covering static/moving GridWorld and CartPole. | Inspect `Seance5/readme.md`, the `rl_sb` folder, and `Seance5/rl_sb/gridworld_runs`. |
-| [secance3](secance3/reinforcement) | Pacman-inspired project, autograder, and helper tooling for larger environments. | Files such as `secance3/learningAgents.py` and `secance3/reinforcementTestClasses.py`. |
+# Expériences PPO (depuis Seance5/rl_sb)
+cd Seance5/rl_sb
+# Voir Seance5/readme.md pour les scripts d'entraînement
+```
+</details>
 
-## Visual assets and logs
+## 📚 Séances en un Coup d'Œil
 
-- Browse `Sceance4/minegym/figures` for heatmaps, dashboards, and exploration/exploitation diagnostics produced during the DQN/QL comparisons.
-- Explore `Seance5/rl_sb/gridworld_runs` for GIFs of the static and moving GridWorld agents plus the CartPole PPO agent.
-- TensorBoard logs and checkpoints live under `Seance5/rl_sb/rl-baselines3-zoo/logs` for the PPO experiments.
+<div align="center">
+<img src="https://progress-bar.dev/100/?title=Progression&width=500&color=2ecc71"/>
+</div>
 
-## How to explore results
+<br/>
 
-1. Start in the session folder you care about and read its README (see the links above) — each README now includes a TL;DR, quick commands, and the story behind the figures.
-2. Inspect the `figures/`, `logs/`, or `checkpoints/` subfolders referenced by that session README.
-3. Re-run the provided scripts if you want fresh figures or to compare new parameter settings.
+<table>
+<tr>
+<th width="15%">Séance</th>
+<th width="40%">Focus</th>
+<th width="45%">Artefacts Clés</th>
+</tr>
 
-Let me know if you would like a narrated tour of a specific session, new visual summaries, or additional metrics added to any experiment.
+<tr>
+<td align="center">
+<br/>
+<img src="https://img.shields.io/badge/📖_Seance_1-Fondations-4A90E2?style=for-the-badge"/>
+<br/><br/>
+<a href="seance1">📂 Voir dossier</a>
+</td>
+<td>
+<b>Algorithmes RL Fondamentaux</b>
+<br/><br/>
+Monte Carlo, programmation dynamique, itération de politique, itération de valeur, Q-Learning tabulaire
+</td>
+<td>
+• Agents : MC, PI, VI, Q-Learning<br/>
+• Scripts de test et validation<br/>
+• Environnements Gym personnalisés<br/>
+<br/>
+<img src="https://img.shields.io/badge/✓-Complete-success?style=flat-square"/>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<br/>
+<img src="https://img.shields.io/badge/🎮_Seance_2-GridWorld-FF6B6B?style=for-the-badge"/>
+<br/><br/>
+<a href="seance2/minegym">📂 Voir dossier</a>
+</td>
+<td>
+<b>GridWorld Paramétrable</b>
+<br/><br/>
+Q-Learning avec diagnostics complets, analyse de sensibilité sur γ et taille de grille
+</td>
+<td>
+• Environnement configurable<br/>
+• Expériences : liveQL, sensitivity_gamma, sensitivity_grid<br/>
+• Mise à jour corrigée avec paramètre w<br/>
+<br/>
+<img src="https://img.shields.io/badge/✓-Complete-success?style=flat-square"/>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<br/>
+<img src="https://img.shields.io/badge/🤖_Seance_4-Deep_RL-EE4C2C?style=for-the-badge"/>
+<br/><br/>
+<a href="Sceance4/minegym">📂 Voir dossier</a>
+</td>
+<td>
+<b>Deep Q-Networks</b>
+<br/><br/>
+Comparaison naïf vs DQN complet avec replay buffer et target network
+</td>
+<td>
+• Architectures : linéaire et MLP<br/>
+• Documentation : README.md et DQNReadme.md<br/>
+• Protocole expérimental rigoureux<br/>
+<br/>
+<img src="https://img.shields.io/badge/✓-Complete-success?style=flat-square"/>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<br/>
+<img src="https://img.shields.io/badge/🚀_Seance_5-PPO-27AE60?style=for-the-badge"/>
+<br/><br/>
+<a href="Seance5">📂 Voir dossier</a>
+</td>
+<td>
+<b>Policy Gradient Methods</b>
+<br/><br/>
+PPO avec Stable-Baselines3 sur GridWorld statique/mobile et CartPole
+</td>
+<td>
+• Environnements : GridWorld et CartPole<br/>
+• Framework : Stable-Baselines3 + rl-baselines3-zoo<br/>
+• Logs TensorBoard et checkpoints<br/>
+<br/>
+<img src="https://img.shields.io/badge/✓-Complete-success?style=flat-square"/>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<br/>
+<img src="https://img.shields.io/badge/👾_Seance_3-Pacman-8E44AD?style=for-the-badge"/>
+<br/><br/>
+<a href="secance3/reinforcement">📂 Voir dossier</a>
+</td>
+<td>
+<b>Projet Pacman</b>
+<br/><br/>
+Environnements complexes avec autograder et agents apprenants sophistiqués
+</td>
+<td>
+• Environnements larges<br/>
+• Autograder complet<br/>
+• Agents apprenants<br/>
+<br/>
+<img src="https://img.shields.io/badge/✓-Complete-success?style=flat-square"/>
+</td>
+</tr>
+
+</table>
+
+## 🎬 Galerie Visuelle
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="50%">
+<a href="Seance5/rl_sb/gridworld_runs/gridworld_static_live.gif">
+<img src="Seance5/rl_sb/gridworld_runs/gridworld_static_live.gif" width="350"/>
+</a>
+<br/><br/>
+<b>GridWorld Statique (PPO)</b>
+</td>
+<td align="center" width="50%">
+<a href="Seance5/rl_sb/gridworld_runs/gridworld_moving_live.gif">
+<img src="Seance5/rl_sb/gridworld_runs/gridworld_moving_live.gif" width="350"/>
+</a>
+<br/><br/>
+<b>GridWorld Mobile (PPO)</b>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+<a href="Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_400k_live.gif">
+<img src="Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_400k_live.gif" width="350"/>
+</a>
+<br/><br/>
+<b>GridWorld Extended Training</b>
+</td>
+<td align="center" width="50%">
+<a href="Seance5/rl_sb/gridworld_runs/test_cartpole.gif">
+<img src="Seance5/rl_sb/gridworld_runs/test_cartpole.gif" width="350"/>
+</a>
+<br/><br/>
+<b>CartPole-v1 (PPO)</b>
+</td>
+</tr>
+</table>
+
+</div>
+
+## 📊 Ressources Visuelles et Logs
+
+<table>
+<tr>
+<td width="33%" align="center">
+<br/>
+📈 <b>Graphiques d'Analyse</b>
+<br/><br/>
+<code>Sceance4/minegym/figures</code>
+<br/><br/>
+Heatmaps, dashboards, diagnostics<br/>DQN/QL
+<br/><br/>
+</td>
+<td width="33%" align="center">
+<br/>
+🎬 <b>GIFs Animés</b>
+<br/><br/>
+<code>Seance5/rl_sb/gridworld_runs</code>
+<br/><br/>
+Agents GridWorld et CartPole<br/>en action
+<br/><br/>
+</td>
+<td width="33%" align="center">
+<br/>
+💾 <b>Logs & Checkpoints</b>
+<br/><br/>
+<code>Seance5/rl_sb/.../logs</code>
+<br/><br/>
+TensorBoard logs et<br/>modèles sauvegardés
+<br/><br/>
+</td>
+</tr>
+</table>
+
+## 🔍 Comment Explorer
+
+1. **Choisir** la séance qui vous intéresse dans le tableau ci-dessus
+2. **Lire** le README spécifique pour le contexte et les commandes
+3. **Visualiser** les figures et GIFs pré-générés
+4. **Re-lancer** les expériences si nécessaire pour de nouveaux paramètres
+
+---
+
+<div align="center">
+
+<br/>
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=2ECC71&center=true&vCenter=true&width=500&lines=Merci+d'avoir+visité+ce+repository+!;Questions+%3F+Contactez-moi" alt="Typing SVG" />
+
+<br/><br/>
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer"/>
+
+</div>
 
