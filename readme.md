@@ -1,110 +1,47 @@
 <div align="center">
 
-<!-- Bannière animée avec gradient -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Reinforcement%20Learning%20%26%20Deep%20RL%20Labs&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Portfolio%202025%20-%20Winter%20Semester&descAlignY=51&descAlign=50"/>
+# 🎯 Reinforcement Learning & Deep RL Labs
+## Portfolio 2025
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![Gymnasium](https://img.shields.io/badge/Gymnasium-0.29-00A67E?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-Academic-green?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge&logo=checkmarx&logoColor=white)
 
-**Collection de devoirs, labs et expériences documentant mon cours en Reinforcement Learning et Deep RL (Hiver 2025) a l'ENSAM de Meknes**
+**Collection de devoirs, labs et expériences documentant mon parcours en Reinforcement Learning et Deep RL (Hiver 2025)**
 
-<p align="center">
-  <a href="#démarrage-rapide">
-    <img src="https://img.shields.io/badge/🚀_Démarrage_Rapide-37a779?style=for-the-badge"/>
-  </a>
-  <a href="#séances-en-un-coup-dœil">
-    <img src="https://img.shields.io/badge/📚_Séances-1e90ff?style=for-the-badge"/>
-  </a>
-  <a href="#galerie-visuelle">
-    <img src="https://img.shields.io/badge/🎬_Démos-ff6b6b?style=for-the-badge"/>
-  </a>
-  <a href="#ressources-visuelles-et-logs">
-    <img src="https://img.shields.io/badge/📊_Résultats-f39c12?style=for-the-badge"/>
-  </a>
-</p>
+[🚀 Démarrage Rapide](#démarrage-rapide) • [📚 Séances](#séances-en-un-coup-dœil) • [🎬 Démos](#galerie-visuelle) • [📊 Résultats](#ressources-visuelles-et-logs)
 
 </div>
 
-<!-- Ligne de séparation avec effet -->
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-
-<br/>
+---
 
 ## ✨ Points Forts
-
-<div align="center">
-
-<!-- Statistiques animées -->
-<table>
-<tr>
-<td align="center">
-<img src="https://img.shields.io/badge/5-Séances-blueviolet?style=for-the-badge&logo=googlescholar&logoColor=white"/>
-<br/><sub><b>Séances Complètes</b></sub>
-</td>
-<td align="center">
-<img src="https://img.shields.io/badge/10+-Algorithmes-orange?style=for-the-badge&logo=tensorflow&logoColor=white"/>
-<br/><sub><b>Algorithmes RL</b></sub>
-</td>
-<td align="center">
-<img src="https://img.shields.io/badge/50+-Expériences-green?style=for-the-badge&logo=atom&logoColor=white"/>
-<br/><sub><b>Expériences Réussies</b></sub>
-</td>
-<td align="center">
-<img src="https://img.shields.io/badge/100+-Visualisations-red?style=for-the-badge&logo=chartdotjs&logoColor=white"/>
-<br/><sub><b>Graphiques & GIFs</b></sub>
-</td>
-</tr>
-</table>
-
-</div>
-
-<br/>
 
 <table>
 <tr>
 <td width="50%">
 
 ### 📖 **Parcours d'Apprentissage Structuré**
-
-<img src="https://img.shields.io/badge/✓-Code_Complet-success?style=flat-square"/> Code complet et expériences  
-<img src="https://img.shields.io/badge/✓-Analyses_Détaillées-success?style=flat-square"/> Analyses détaillées et figures  
-<img src="https://img.shields.io/badge/✓-Documentation_README-success?style=flat-square"/> Documentation README complète  
-
-> Chaque dossier `seance` est une unité autonome avec tout le nécessaire pour reproduire les résultats !
+Chaque dossier `seance` contient :
+- 📝 Code complet et expériences
+- 📊 Analyses détaillées et figures
+- 📚 Documentation README complète
 
 </td>
 <td width="50%">
 
 ### 🧠 **Techniques Couvertes**
-
-```mermaid
-graph TD
-    A[Reinforcement Learning] --> B[Classique]
-    A --> C[Deep RL]
-    B --> D[DP, MC, Q-Learning]
-    C --> E[DQN Variants]
-    C --> F[Policy Gradients PPO]
-    style A fill:#e1f5ff
-    style B fill:#fff4e1
-    style C fill:#ffe1f5
-```
+- 🎲 RL Classique : DP, MC, Q-Learning
+- 🎮 Deep RL : variantes DQN
+- 🚀 Avancé : PPO avec Stable-Baselines3
 
 </td>
 </tr>
 </table>
 
 ### 🎬 Narration Visuelle
-
-<div align="center">
-
-<kbd>
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=1000&color=2E9EF7&center=true&vCenter=true&multiline=true&width=800&height=80&lines=Toutes+les+expériences+incluent+des+visualisations+animées;GIFs+%2B+Tableaux+de+bord+interactifs;Observez+le+comportement+sans+exécuter+le+code+!"/>
-</kbd>
-
-</div>
+Toutes les expériences incluent des **visualisations animées** (GIFs) et des **tableaux de bord interactifs** pour observer le comportement des agents sans exécuter le code !
 
 ## 🚀 Démarrage Rapide
 
@@ -145,328 +82,110 @@ cd Seance5/rl_sb
 
 ## 📚 Séances en un Coup d'Œil
 
-<div align="center">
-
-<!-- Indicateur de progression -->
-<img src="https://progress-bar.dev/100/?title=Progression%20Totale&width=600&color=babaca&suffix=%"/>
-
-</div>
-
 <table>
 <tr>
-<th width="15%">Séance</th>
-<th width="25%">Focus</th>
-<th width="20%">Techniques</th>
-<th width="40%">Artefacts Clés</th>
+<th>Séance</th>
+<th>Focus</th>
+<th>Techniques</th>
+<th>Artefacts Clés</th>
 </tr>
 
 <tr>
-<td align="center">
-<br/>
-<img src="https://img.shields.io/badge/📖_Seance_1-Fondations-4A90E2?style=for-the-badge"/>
-<br/><br/>
-<a href="seance1">📂 Voir le dossier</a>
-<br/><br/>
-</td>
-<td>
-<b>Algorithmes RL Fondamentaux</b>
-<br/><br/>
-Apprentissage des bases du RL : programmation dynamique, méthodes Monte Carlo, et apprentissage par différence temporelle.
-</td>
-<td align="center">
-
-![MC](https://img.shields.io/badge/Monte_Carlo-4169E1?style=flat-square&logo=python)
-![DP](https://img.shields.io/badge/Dynamic_Programming-2ECC71?style=flat-square&logo=python)
-![QL](https://img.shields.io/badge/Q--Learning-E67E22?style=flat-square&logo=python)
-![PI](https://img.shields.io/badge/Policy_Iteration-9B59B6?style=flat-square&logo=python)
-
-<br/>
-<img src="https://progress-bar.dev/100/?scale=100&title=Complété&width=120&color=2ecc71"/>
-
-</td>
+<td><b>📖 <a href="seance1">Seance 1</a></b></td>
+<td>Algorithmes RL Fondamentaux</td>
 <td>
 
-• Implémentations agents : MC, PI, VI, Q-Learning  
-• Scripts de test et validation  
-• Environnements Gym personnalisés  
-
-<details>
-<summary>📊 Voir les métriques</summary>
-<br/>
-<code>✓ 4 algorithmes implémentés</code><br/>
-<code>✓ 100% tests réussis</code><br/>
-<code>✓ Documentation complète</code>
-</details>
+![MC](https://img.shields.io/badge/Monte_Carlo-blue)
+![DP](https://img.shields.io/badge/Dynamic_Programming-green)
+![QL](https://img.shields.io/badge/Q--Learning-orange)
 
 </td>
+<td>Implémentations agents : MC, PI, VI, Q-Learning</td>
 </tr>
 
 <tr>
-<td align="center">
-<br/>
-<img src="https://img.shields.io/badge/🎮_Seance_2-GridWorld-FF6B6B?style=for-the-badge"/>
-<br/><br/>
-<a href="seance2/minegym">📂 Voir le dossier</a>
-<br/><br/>
-</td>
-<td>
-<b>Expériences GridWorld</b>
-<br/><br/>
-Monde paramétrable avec analyse de sensibilité complète sur γ et la taille de grille.
-</td>
-<td align="center">
-
-![QL](https://img.shields.io/badge/Q--Learning-E67E22?style=flat-square&logo=python)
-![Custom](https://img.shields.io/badge/Custom_Env-8E44AD?style=flat-square&logo=openai)
-![Analysis](https://img.shields.io/badge/Sensitivity-16A085?style=flat-square&logo=chartdotjs)
-
-<br/>
-<img src="https://progress-bar.dev/100/?scale=100&title=Complété&width=120&color=2ecc71"/>
-
-</td>
+<td><b>🎮 <a href="seance2/minegym">Seance 2</a></b></td>
+<td>Expériences GridWorld</td>
 <td>
 
-• Monde paramétrable (goals, obstacles)  
-• Analyse sensibilité γ et taille grille  
-• Q-Learning corrigé (paramètre w)  
-
-<details>
-<summary>🎬 Voir les animations</summary>
-<br/>
-<code>✓ 3 expériences majeures</code><br/>
-<code>✓ 20+ graphiques générés</code><br/>
-<code>✓ Vidéo training live</code>
-</details>
+![QL](https://img.shields.io/badge/Q--Learning-orange)
+![Custom](https://img.shields.io/badge/Custom_Env-purple)
 
 </td>
+<td>Monde paramétrable, analyse de sensibilité, Q-Learning corrigé</td>
 </tr>
 
 <tr>
-<td align="center">
-<br/>
-<img src="https://img.shields.io/badge/🤖_Seance_4-Deep_RL-EE4C2C?style=for-the-badge"/>
-<br/><br/>
-<a href="Sceance4/minegym">📂 Voir le dossier</a>
-<br/><br/>
-</td>
-<td>
-<b>Deep Q-Networks</b>
-<br/><br/>
-Comparaison rigoureuse entre approche naïve linéaire et DQN complet avec replay buffer.
-</td>
-<td align="center">
-
-![DQN](https://img.shields.io/badge/DQN-C0392B?style=flat-square&logo=pytorch)
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch)
-![Neural](https://img.shields.io/badge/Neural_Nets-3498DB?style=flat-square&logo=tensorflow)
-
-<br/>
-<img src="https://progress-bar.dev/100/?scale=100&title=Complété&width=120&color=2ecc71"/>
-
-</td>
+<td><b>🤖 <a href="Sceance4/minegym">Seance 4</a></b></td>
+<td>Deep Q-Networks</td>
 <td>
 
-• Comparaison Naïf vs DQN complet  
-• Architecture flexible (linéaire/MLP)  
-• Protocole expérimental rigoureux  
-
-<details>
-<summary>⚙️ Voir les configs</summary>
-<br/>
-<code>✓ 2 architectures testées</code><br/>
-<code>✓ Replay buffer + target net</code><br/>
-<code>✓ CSV logs détaillés</code>
-</details>
+![DQN](https://img.shields.io/badge/DQN-red)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C)
 
 </td>
+<td>Comparaison Naïf vs DQN, architecture flexible</td>
 </tr>
 
 <tr>
-<td align="center">
-<br/>
-<img src="https://img.shields.io/badge/🚀_Seance_5-Policy_Gradient-27AE60?style=for-the-badge"/>
-<br/><br/>
-<a href="Seance5">📂 Voir le dossier</a>
-<br/><br/>
-</td>
-<td>
-<b>Méthodes à Gradient de Politique</b>
-<br/><br/>
-PPO avec Stable-Baselines3 sur GridWorld statique/mobile et CartPole.
-</td>
-<td align="center">
-
-![PPO](https://img.shields.io/badge/PPO-27AE60?style=flat-square&logo=openai)
-![SB3](https://img.shields.io/badge/Stable--Baselines3-F39C12?style=flat-square&logo=python)
-![TB](https://img.shields.io/badge/TensorBoard-FF6F00?style=flat-square&logo=tensorflow)
-
-<br/>
-<img src="https://progress-bar.dev/100/?scale=100&title=Complété&width=120&color=2ecc71"/>
-
-</td>
+<td><b>🚀 <a href="Seance5">Seance 5</a></b></td>
+<td>Méthodes à Gradient de Politique</td>
 <td>
 
-• GridWorld statique/mobile avec PPO  
-• Tentative transfer learning  
-• Benchmarks CartPole complets  
-
-<details>
-<summary>📈 Voir les runs</summary>
-<br/>
-<code>✓ 8+ runs d'entraînement</code><br/>
-<code>✓ Logs TensorBoard complets</code><br/>
-<code>✓ 9 GIFs de démonstration</code>
-</details>
+![PPO](https://img.shields.io/badge/PPO-brightgreen)
+![SB3](https://img.shields.io/badge/Stable--Baselines3-yellow)
 
 </td>
+<td>GridWorld statique/mobile, CartPole, transfer learning</td>
 </tr>
 
 <tr>
-<td align="center">
-<br/>
-<img src="https://img.shields.io/badge/👾_Seance_3-Pacman-8E44AD?style=for-the-badge"/>
-<br/><br/>
-<a href="secance3/reinforcement">📂 Voir le dossier</a>
-<br/><br/>
-</td>
-<td>
-<b>Projet Pacman</b>
-<br/><br/>
-Environnements larges avec autograder complet et agents apprenants sophistiqués.
-</td>
-<td align="center">
-
-![Games](https://img.shields.io/badge/Game_AI-8E44AD?style=flat-square&logo=atari)
-![Grading](https://img.shields.io/badge/Autograder-E74C3C?style=flat-square&logo=checkmarx)
-
-<br/>
-<img src="https://progress-bar.dev/100/?scale=100&title=Complété&width=120&color=2ecc71"/>
-
-</td>
+<td><b>👾 <a href="secance3/reinforcement">Seance 3</a></b></td>
+<td>Projet Pacman</td>
 <td>
 
-• Environnements larges et complexes  
-• Autograder complet  
-• Agents apprenants sophistiqués  
-
-<details>
-<summary>🎯 Voir les features</summary>
-<br/>
-<code>✓ Multiple layouts</code><br/>
-<code>✓ Ghost agents</code><br/>
-<code>✓ Test cases complets</code>
-</details>
+![Games](https://img.shields.io/badge/Game_AI-blueviolet)
 
 </td>
+<td>Environnements larges, autograder, agents apprenants</td>
 </tr>
 
 </table>
-
-<br/>
-
-<div align="center">
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
-</div>
 
 ## 🎬 Galerie Visuelle
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=F75C7E&center=true&vCenter=true&width=600&lines=Entraînement+Agents+GridWorld+(PPO);Animations+en+Direct+%F0%9F%8E%AC;Résultats+Spectaculaires+%F0%9F%8C%9F" alt="Typing SVG" />
-
-<br/><br/>
-
-### 🟢 GridWorld Goal Statique
+### Entraînement Agent GridWorld (PPO)
 
 <table>
 <tr>
 <td align="center">
-<a href="Seance5/rl_sb/gridworld_runs/gridworld_static_live.gif">
-<img src="Seance5/rl_sb/gridworld_runs/gridworld_static_live.gif" width="300" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
-</a>
-<br/>
-<img src="https://img.shields.io/badge/100k_steps-Success-2ecc71?style=flat-square"/>
-<br/><b>Goal Statique</b>
+<img src="Seance5/rl_sb/gridworld_runs/gridworld_static_live.gif" width="300"/>
+<br/><b>Goal Statique (100k steps)</b>
 </td>
 <td align="center">
-<a href="Seance5/rl_sb/gridworld_runs/gridworld_moving_live.gif">
-<img src="Seance5/rl_sb/gridworld_runs/gridworld_moving_live.gif" width="300" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
-</a>
-<br/>
-<img src="https://img.shields.io/badge/100k_steps-Success-2ecc71?style=flat-square"/>
-<br/><b>Goal Mobile</b>
+<img src="Seance5/rl_sb/gridworld_runs/gridworld_moving_live.gif" width="300"/>
+<br/><b>Goal Mobile (100k steps)</b>
 </td>
 </tr>
 <tr>
 <td align="center">
-<a href="Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_400k_live.gif">
-<img src="Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_400k_live.gif" width="300" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
-</a>
-<br/>
-<img src="https://img.shields.io/badge/400k_steps-Excellent-27ae60?style=flat-square"/>
-<br/><b>Goal Statique (Extended)</b>
+<img src="Seance5/rl_sb/gridworld_runs/gridworld_ppo_static_400k_live.gif" width="300"/>
+<br/><b>Goal Statique (400k steps)</b>
 </td>
 <td align="center">
-<a href="Seance5/rl_sb/gridworld_runs/test_cartpole.gif">
-<img src="Seance5/rl_sb/gridworld_runs/test_cartpole.gif" width="300" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
-</a>
-<br/>
-<img src="https://img.shields.io/badge/CartPole-Solved-f39c12?style=flat-square"/>
+<img src="Seance5/rl_sb/gridworld_runs/test_cartpole.gif" width="300"/>
 <br/><b>CartPole-v1 (PPO)</b>
 </td>
 </tr>
 </table>
 
-<br/>
-
-<kbd>💡 <b>Astuce</b> : Cliquez sur les GIFs pour les voir en grand !</kbd>
-
 </div>
 
-<br/>
-
-<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+---
 
 ## 📊 Ressources Visuelles et Logs
-
-<div align="center">
-
-<table>
-<tr>
-<td align="center" width="25%">
-<img src="https://img.icons8.com/fluency/96/000000/bar-chart.png" width="80"/>
-<br/><br/>
-<img src="https://img.shields.io/badge/100+-Graphiques-E74C3C?style=for-the-badge"/>
-<br/><br/>
-<sub>Heatmaps, dashboards, analyses</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://img.icons8.com/fluency/96/000000/video.png" width="80"/>
-<br/><br/>
-<img src="https://img.shields.io/badge/9-GIFs_Animés-3498DB?style=for-the-badge"/>
-<br/><br/>
-<sub>Visualisations d'agents en action</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://img.icons8.com/fluency/96/000000/discord-logo.png" width="80"/>
-<br/><br/>
-<img src="https://img.shields.io/badge/TensorBoard-Logs_Complets-FF6F00?style=for-the-badge"/>
-<br/><br/>
-<sub>Métriques d'entraînement détaillées</sub>
-</td>
-<td align="center" width="25%">
-<img src="https://img.icons8.com/fluency/96/000000/save.png" width="80"/>
-<br/><br/>
-<img src="https://img.shields.io/badge/Checkpoints-Sauvegardés-27AE60?style=for-the-badge"/>
-<br/><br/>
-<sub>Modèles prêts à l'emploi</sub>
-</td>
-</tr>
-</table>
-
-</div>
-
-<br/>
 
 > **💡 Astuce :** Toutes les expériences incluent des visualisations pré-générées — vous pouvez explorer les résultats sans exécuter le code !
 
@@ -503,20 +222,9 @@ graph LR
 
 <div align="center">
 
-### 🌟 Merci d'avoir visité ce repository !
+**📫 Questions ou commentaires ?** Ouvrez une issue ou contactez-moi !
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=2ECC71&center=true&vCenter=true&width=600&lines=Questions+ou+commentaires+%3F;Ouvrez+une+issue+ou+contactez-moi+!;⭐+Star+ce+repo+si+utile+!" alt="Typing SVG" />
-
-<br/><br/>
-
-<a href="#">
-  <img src="https://img.shields.io/badge/⬆️_Retour_en_Haut-2E9EF7?style=for-the-badge"/>
-</a>
-
-<br/><br/>
-
-<!-- Footer wave -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer"/>
+⭐ **Star ce repo** si vous l'avez trouvé utile !
 
 </div>
 
