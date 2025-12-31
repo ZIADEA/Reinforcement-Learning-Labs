@@ -1,33 +1,139 @@
-Travaux demandés
--rendre le monde parametrable pour : la position , le nombre de goals ; la position , le nombre d'obstacle ; la stationnariter ou nom du probleme en rendant le goal ou les  mobile ou fixe .
+<div align="center">
 
-Pour cette séance, seul l’agent Q-Learning (QL) a été utilisé pour produire les experiences qui on donner par la suite Les figures présentes dans les dossiers figures/goal (fixe et mobile)  :
-Observation du comportement de l’agent pour un goal fixe ;
+<!-- Bannière animée -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,5,8&height=150&section=header&text=Seance%204&fontSize=50&fontColor=fff&animation=fadeIn&fontAlignY=38&desc=GridWorld%20Flexible%20%26%20DQN&descAlignY=55&descAlign=50"/>
 
-Observation du comportement de l’agent pour un goal mobile ;
+<br/>
 
-Observation de la convergence des récompenses (rewards) pour différents valeurs de γ (gamma)  ;
+![DQN](https://img.shields.io/badge/Deep_RL-DQN-red?style=for-the-badge&logo=pytorch)
+![PyTorch](https://img.shields.io/badge/Framework-PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge&logo=checkmarx)
+![Neural](https://img.shields.io/badge/Neural_Networks-Implemented-3498db?style=for-the-badge)
 
-Observation de la convergence des récompenses (rewards)  pour différentes tailles de monde.
+<br/>
 
--À la fin, dernière demande :
-Implémenter un algorithme Q-Learning où la mise à jour des valeurs d’action (action-value) est corrigée avec un paramètre w, au lieu d’un Q-Learning tabulaire classique.
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3000&pause=1000&color=C0392B&center=true&vCenter=true&width=700&lines=Q-Learning+Corrigé+%2B+Deep+Q-Networks;🤖+Comparaison+Naïf+vs+DQN+Complet;📈+Architecture+Flexible+(Linéaire+%2F+MLP)" alt="Typing SVG" />
 
-NB : Il est possible que les autres agents n’aient pas été mis à jour pour être compatibles avec le nouveau world défini lors de cette séance.
+<br/>
 
+<p align="center">
+  <a href="README.md">
+    <img src="https://img.shields.io/badge/📖_README_Principal-4A90E2?style=for-the-badge"/>
+  </a>
+  <a href="DQNReadme.md">
+    <img src="https://img.shields.io/badge/🧪_Détails_DQN-EE4C2C?style=for-the-badge"/>
+  </a>
+</p>
 
+</div>
 
-se conecter a l environnement python avec : 
-```bash
+<br/>
+
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+<br/>
+
+## 🎯 Aperçu
+
+Cette séance poursuit le travail sur le GridWorld paramétrable tout en s'assurant que chaque agent peut toujours gérer la nouvelle définition du monde. L'accent est mis sur la **mise à jour corrigée des valeurs d'action**, les nouvelles **métriques Q-Learning** et la **comparaison DQN vs naïf** décrite dans [`DQNReadme.md`](DQNReadme.md).
+
+## 🚀 Démarrage Rapide
+
+<details open>
+<summary><b>⚙️ Configuration de l'Environnement</b></summary>
+
+```powershell
 & C:\Users\DJERI\VSCODE\Programmation\python\environnements\rl_venv\Scripts\Activate.ps1
 ```
-Pour executer les experiments ils fait se placer dans seance2 et executer : 
+</details>
+
+<details open>
+<summary><b>📝 Lancer les Diagnostics Q-Learning</b></summary>
+
 ```bash
+cd Sceance4/minegym
 python -m minegym.experiments.liveQL
 python -m minegym.experiments.sensitivity_gammaQL
 python -m minegym.experiments.sensitivity_grid_sizeQL
 ```
+</details>
 
+<details>
+<summary><b>🤖 Lancer les Expériences DQN</b></summary>
+
+Pour l'expérience DQN flexible (`exp_flexible.py`) et la comparaison entre l'agent linéaire naïf et la pile DQN complète, voir la référence CLI complète dans [📖 DQNReadme.md](DQNReadme.md).
+
+</details>
+
+### What changed in this séance?
+
+- The GridWorld now accepts dynamic goals, obstacles, and reward tweaks without touching the scripts.
+- All figures (live animation, sensitivity plots, dashboards) still live in `figures/goal`, but the Q-Learning agent’s logging now includes the new `w` correction term.
+- We validate that Q-Learning keeps converging before running the DQN comparison.
+
+### Corrected Q-Learning update
+
+We modify the tabular update to include a weighting factor `w`, so the library entry follows:
+
+$$Q(s,a) \leftarrow Q(s,a) + \alpha \cdot w \cdot \left[r + \gamma \max_{a'} Q(s',a') - Q(s,a)\right].$$
+
+The parameter `w` allows us to dampen or accentuate the move toward the TD target when the environment changes from fixed to mobile goals, or when obstacles are reconfigured.
+
+---
+
+## 🖼️ Galerie de Sorties Visuelles
+
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=C0392B&center=true&vCenter=true&width=500&lines=Résultats+DQN+Naïf+(Linéaire);Architectures+Comparées" alt="Typing SVG" />
+
+<br/><br/>
+
+<table>
+<tr>
+<td align="center" width="33%">
+<a href="figures/flex_naive_lin/V_star_heatmap.png">
+<img src="figures/flex_naive_lin/V_star_heatmap.png" width="250" style="border: 3px solid #3498db; border-radius: 8px;"/>
+</a>
+<br/><br/>
+<img src="https://img.shields.io/badge/Value_Function-3498db?style=flat-square&logo=python"/>
+</td>
+<td align="center" width="33%">
+<a href="figures/flex_naive_lin/pi_star_grid.png">
+<img src="figures/flex_naive_lin/pi_star_grid.png" width="250" style="border: 3px solid #2ecc71; border-radius: 8px;"/>
+</a>
+<br/><br/>
+<img src="https://img.shields.io/badge/Optimal_Policy-2ecc71?style=flat-square&logo=checkmarx"/>
+</td>
+<td align="center" width="33%">
+<a href="figures/flex_naive_lin/visits.png">
+<img src="figures/flex_naive_lin/visits.png" width="250" style="border: 3px solid #e67e22; border-radius: 8px;"/>
+</a>
+<br/><br/>
+<img src="https://img.shields.io/badge/State_Visits-e67e22?style=flat-square&logo=chartdotjs"/>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="3">
+<br/>
+<a href="figures/flex_naive_lin/summary_dashboard.png">
+<img src="figures/flex_naive_lin/summary_dashboard.png" width="800" style="border: 4px solid #9b59b6; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
+</a>
+<br/><br/>
+<img src="https://img.shields.io/badge/📊_Complete_Dashboard-Full_Metrics-9b59b6?style=for-the-badge"/>
+</td>
+</tr>
+</table>
+
+</div>
+
+---
+
+### 📊 Sorties Visuelles
+
+- Live dashboards: `live_training.mp4`, `summary_dashboard.png`, reward and ε curves (see the `liveQL` description below).
+- Heatmap artifacts: `V_star_heatmap_annotated.png`, `pi_star_grid.png`, `policy_value.png`, `visits.png`, `dominant_actions.png`.
+- Sensitivity figures: each `sensitivity_gamma*` and `sensitivity_grid*` plot illustrates the convergence dynamics referred to in the table below.
 
 # Modifier l'environnement GridEnv
 
