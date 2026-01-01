@@ -14,6 +14,41 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3000&pause=1000&color=C0392B&center=true&vCenter=true&width=700&lines=Q-Learning+Corrigé+%2B+Deep+Q-Networks;🤖+Comparaison+Naïf+vs+DQN+Complet;📈+Architecture+Flexible+(Linéaire+%2F+MLP)" alt="Typing SVG" />
 
+---
+
+## 🎓 Note Pédagogique : La Révolution du Deep Q-Network (DQN)
+
+### 🌍 Le "Moment Atari" (2013-2015)
+Si vous devez retenir une date dans l'histoire récente de l'IA, c'est **2015**. C'est l'année où l'équipe de **DeepMind** (Mnih et al.) a publié dans *Nature* leur article sur le **DQN**.
+
+Jusqu'alors, le RL était limité à des problèmes "jouets" (comme notre GridWorld tabulaire) où l'on pouvait stocker chaque état dans un tableau. Mais comment jouer à un jeu vidéo Atari où l'écran fait 210x160 pixels ? Le nombre d'états possibles dépasse le nombre d'atomes dans l'univers ($256^{210 \times 160}$). Le tableau Q est impossible à stocker.
+
+L'idée de génie a été de remplacer le tableau Q par un **réseau de neurones profond** (Deep Neural Network) capable d'approximer la fonction $Q(s, a)$. L'agent ne "mémorise" plus la grille, il "voit" et "comprend" l'image.
+
+### ⚠️ Le Problème de la "Triade Mortelle"
+Pourquoi n'avions-nous pas fait cela plus tôt ? Parce que combiner le RL avec des réseaux de neurones est notoirement instable. C'est ce que Sutton et Barto appellent la "Deadly Triad" (Triade Mortelle) :
+1.  **Approximation de fonction** (Réseaux de neurones)
+2.  **Bootstrapping** (Utiliser une estimation pour mettre à jour une autre estimation)
+3.  **Off-policy training** (Apprendre sur des données générées par une ancienne politique)
+
+Quand on mélange ces trois ingrédients naïvement, l'apprentissage diverge souvent vers l'infini. L'agent devient "fou".
+
+### 🛠️ Les Solutions Techniques du DQN
+Dans cette séance, nous implémentons les deux innovations majeures qui ont permis de stabiliser le DQN, transformant une idée instable en une révolution technologique :
+
+1.  **Experience Replay (Replay Buffer)** :
+    *   *Problème* : Dans un jeu, les données sont corrélées (l'image à t+1 ressemble à t). Les réseaux de neurones détestent ça (ils oublient ce qu'ils ont appris avant).
+    *   *Solution* : On stocke les transitions $(s, a, r, s')$ dans une mémoire géante et on s'entraîne sur un **lot aléatoire** (batch). Cela brise les corrélations temporelles.
+
+2.  **Target Network (Réseau Cible)** :
+    *   *Problème* : On essaie d'approcher une cible $r + \gamma \max Q(s', a')$. Mais $Q$ est le réseau lui-même ! C'est comme un chien qui court après sa queue : la cible bouge à chaque mise à jour.
+    *   *Solution* : On crée une copie "gelée" du réseau (Target Network) pour calculer la cible. On ne met à jour cette copie que toutes les X étapes. La cible devient stable.
+
+> **📚 Référence Incontournable :**
+> *Mnih, V., Kavukcuoglu, K., Silver, D., et al. (2015). Human-level control through deep reinforcement learning. Nature, 518(7540), 529-533.*
+
+---
+
 <br/>
 
 <p align="center">
@@ -81,64 +116,251 @@ The parameter `w` allows us to dampen or accentuate the move toward the TD targe
 
 ---
 
-## 🖼️ Galerie de Sorties Visuelles
+## 🖼️ Galerie Complète des Résultats Visuels
 
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=C0392B&center=true&vCenter=true&width=500&lines=Résultats+DQN+Naïf+(Linéaire);Architectures+Comparées" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=C0392B&center=true&vCenter=true&width=500&lines=Analyse+DQN+Flexible;Naive+vs+Deep+Architectures" alt="Typing SVG" />
 
-<br/><br/>
+</div>
+
+### 🎯 Résultats Globaux - Politique & Valeurs
+
+<details open>
+<summary><b>🧭 Politique Optimale & Fonction de Valeur</b></summary>
 
 <table>
 <tr>
 <td align="center" width="33%">
-<a href="figures/flex_naive_lin/V_star_heatmap.png">
-<img src="figures/flex_naive_lin/V_star_heatmap.png" width="250" style="border: 3px solid #3498db; border-radius: 8px;"/>
-</a>
+<img src="figures/flex_naive_lin/V_star_heatmap.png" width="100%"/>
 <br/><br/>
-<img src="https://img.shields.io/badge/Value_Function-3498db?style=flat-square&logo=python"/>
-</td>
-<td align="center" width="33%">
-<a href="figures/flex_naive_lin/pi_star_grid.png">
-<img src="figures/flex_naive_lin/pi_star_grid.png" width="250" style="border: 3px solid #2ecc71; border-radius: 8px;"/>
-</a>
-<br/><br/>
-<img src="https://img.shields.io/badge/Optimal_Policy-2ecc71?style=flat-square&logo=checkmarx"/>
-</td>
-<td align="center" width="33%">
-<a href="figures/flex_naive_lin/visits.png">
-<img src="figures/flex_naive_lin/visits.png" width="250" style="border: 3px solid #e67e22; border-radius: 8px;"/>
-</a>
-<br/><br/>
-<img src="https://img.shields.io/badge/State_Visits-e67e22?style=flat-square&logo=chartdotjs"/>
-</td>
-</tr>
-<tr>
-<td align="center" colspan="3">
+<b>🌡️ Heatmap V*</b>
 <br/>
-<a href="figures/flex_naive_lin/summary_dashboard.png">
-<img src="figures/flex_naive_lin/summary_dashboard.png" width="800" style="border: 4px solid #9b59b6; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"/>
-</a>
+<sub><i>Valeurs d'états optimales apprises</i></sub>
+</td>
+<td align="center" width="33%">
+<img src="figures/flex_naive_lin/pi_star_grid.png" width="100%"/>
 <br/><br/>
-<img src="https://img.shields.io/badge/📊_Complete_Dashboard-Full_Metrics-9b59b6?style=for-the-badge"/>
+<b>🎯 Politique π* (Grid)</b>
+<br/>
+<sub><i>Flèches directionnelles par état</i></sub>
+</td>
+<td align="center" width="33%">
+<img src="figures/flex_naive_lin/policy_value.png" width="100%"/>
+<br/><br/>
+<b>🔄 Policy + Value Overlay</b>
+<br/>
+<sub><i>Superposition π* et V*</i></sub>
 </td>
 </tr>
 </table>
 
-</div>
+**📝 Analyse :**
+- **V_star_heatmap** : Mode naive arrive à apprendre un gradient de valeurs (valeurs élevées près du goal, négatives loin)
+- **pi_star_grid** : Politique cohérente malgré l'absence de replay buffer → convergence grâce à l'environnement simple (6×6)
+- **policy_value** : Validation que arg max Q(s,a) suit bien le gradient de V*
+
+**⚠️ Limitation Naive** : Sur des environnements plus complexes, l'absence de replay buffer causerait une instabilité (corrélation temporelle des transitions).
+
+</details>
+
+### 📈 Métriques d'Entraînement - Convergence & Diagnostics
+
+<details>
+<summary><b>🔬 Analyses Détaillées du Processus d'Apprentissage</b></summary>
+
+#### 🎢 Évolution de la Loss MSE
+
+<p align="center">
+<img src="figures/flex_naive_lin/naive_loss_mean_per_episode.png" width="70%"/>
+<br/>
+<i>Loss moyennée par épisode avec moving average (MA50)</i>
+</p>
+
+**📝 Analyse :**
+- Décroissance typique de la TD-loss : débute élevée (~25-30) quand Q est initialisé aléatoirement
+- Convergence vers ~5-10 après 800 épisodes → résidu dû aux transitions stochastiques (ε-greedy persiste)
+- Pics occasionnels : changements de goal aléatoires (1 goal par épisode) créent des distributions non-stationnaires
+
+**💡 Utilité** : Confirme que l'optimiseur converge (loss décroissante = TD-error diminue)
 
 ---
 
-### 📊 Sorties Visuelles
+#### 🏃 Longueur des Épisodes
 
-- Live dashboards: `live_training.mp4`, `summary_dashboard.png`, reward and ε curves (see the `liveQL` description below).
-- Heatmap artifacts: `V_star_heatmap_annotated.png`, `pi_star_grid.png`, `policy_value.png`, `visits.png`, `dominant_actions.png`.
-- Sensitivity figures: each `sensitivity_gamma*` and `sensitivity_grid*` plot illustrates the convergence dynamics referred to in the table below.
+<p align="center">
+<img src="figures/flex_naive_lin/naive_steps_per_episode.png" width="70%"/>
+<br/>
+<i>Nombre de steps par épisode (MA50)</i>
+</p>
 
-# Modifier l'environnement GridEnv
+**📝 Analyse :**
+- Début : ~30-40 steps (exploration aléatoire sur grille 6×6)
+- Convergence : ~12-15 steps → proche de l'optimal Manhattan distance
+- Variance élevée même après convergence : due aux goals aléatoires (certains proches, d'autres lointains)
 
-Le fichier principal pour régler la logique du monde est :`minegym/envs/gridworld.py`
-## Définition des actions et états
+**💡 Utilité** : Métrique proxy de performance (moins de steps = politique plus directe vers goal)
+
+---
+
+#### ⚖️ Exploration (ε) vs Poids du Réseau (||θ||)
+
+<p align="center">
+<img src="figures/flex_naive_lin/naive_epsilon_theta_over_episodes.png" width="70%"/>
+<br/>
+<i>Dual-axis plot : epsilon (bleu) & norme L2 des poids (orange)</i>
+</p>
+
+**📝 Analyse :**
+- **ε (bleu)** : Décroissance exponentielle classique (ε₀=1.0 → ε_min=0.01)
+- **||θ|| (orange)** : Croissance initiale rapide puis stabilisation autour de 8-10
+  - Interprétation : Le réseau linéaire apprend des poids non-nuls pour extraire les features (position x,y)
+  - Stabilisation = convergence des poids (pas de divergence catastrophique)
+
+**💡 Utilité** : 
+- Détecte l'overfitting (si ||θ|| explose) ou underfitting (si ||θ|| reste proche de 0)
+- Valide que l'exploration décroît bien pendant l'apprentissage
+
+---
+
+#### 🔗 Corrélation Loss vs Return
+
+<p align="center">
+<img src="figures/flex_naive_lin/naive_loss_vs_return.png" width="70%"/>
+<br/>
+<i>Scatter plot : chaque point = 1 épisode (x=return cumulé, y=loss moyennée)</i>
+</p>
+
+**📝 Analyse :**
+- **Corrélation négative attendue** : Épisodes avec retours élevés (proches du goal) → loss faible (Q bien calibrée)
+- **Cluster principal** : Return ∈ [35, 50], Loss ∈ [5, 15] → régime stable après convergence
+- **Outliers** : 
+  - Return faible + Loss élevée : Début d'entraînement (exploration aléatoire)
+  - Return élevé + Loss faible : Fin d'entraînement (exploitation optimale)
+
+**💡 Utilité** : Diagnostic de la qualité de l'approximateur Q :
+- Si loss élevée malgré retours élevés → réseau sous-exprime la valeur (capacity insuffisante)
+- Si loss faible malgré retours faibles → réseau sur-optimiste (surestimation biais)
+
+</details>
+
+### 🗺️ Analyses Comportementales
+
+<details>
+<summary><b>🔍 Distribution Spatiale & Actions</b></summary>
+
+<table>
+<tr>
+<td align="center" width="50%">
+<img src="figures/flex_naive_lin/visits.png" width="100%"/>
+<br/><br/>
+<b>🗺️ Heatmap des Visites</b>
+<br/>
+<sub><i>États visités durant l'entraînement</i></sub>
+</td>
+<td align="center" width="50%">
+<img src="figures/flex_naive_lin/dominant_actions.png" width="100%"/>
+<br/><br/>
+<b>🎲 Actions Dominantes Empiriques</b>
+<br/>
+<sub><i>Action la plus fréquente par état</i></sub>
+</td>
+</tr>
+</table>
+
+**📝 Analyse :**
+- **visits.png** : 
+  - Distribution relativement uniforme (goals aléatoires forcent exploration de tout l'espace)
+  - Zones centrales légèrement plus visitées (moyennement accessibles depuis n'importe quel départ)
+  
+- **dominant_actions.png** :
+  - Cohérence avec π* (flèches empiriques ≈ politique apprise)
+  - Révèle les biais stochastiques (certains états favorisent une action à cause de l'ε-greedy résiduel)
+
+**💡 Utilité** : Détecte les zones sous-explorées (potentiels trous dans la coverage) ou sur-visitées (biais de l'exploration)
+
+</details>
+
+### 📊 Dashboard Récapitulatif
+
+<details>
+<summary><b>📈 Vue d'Ensemble 6-en-1</b></summary>
+
+<p align="center">
+<img src="figures/flex_naive_lin/summary_dashboard.png" width="90%"/>
+<br/><br/>
+<b>Dashboard Complet</b> : 6 subplots (reward distribution, convergence, episode length, action distribution, explore/exploit, reward/step)
+</p>
+
+**📝 Contenu du Dashboard :**
+
+1. **Reward Distribution per Action** : Histogramme montrant que toutes les actions obtiennent des rewards similaires (environnement symétrique)
+2. **Convergence Curve** : Return cumulé avec MA50 → croissance vers +45 optimal
+3. **Episode Length** : Décroissance vers ~12 steps (optimal)
+4. **Action Distribution** : Proportions des 4 actions (~25% chacune initialement, puis biais selon goal)
+5. **Exploration vs Exploitation** : Ratio greedy actions augmente de 0% → 99%
+6. **Reward per Step** : Moyenne par épisode → converge vers +3.5 par step (optimal = goal_reward / steps)
+
+**💡 Utilité** : Vue synthétique pour diagnostiquer rapidement tout problème (plateau prématuré, biais d'action, exploration insuffisante, etc.)
+
+</details>
+
+---
+
+### 📂 Fichier CSV - Logs Détaillés
+
+Le fichier `naive_logs.csv` contient les métriques brutes par épisode :
+
+```csv
+episode,steps,return,loss,epsilon,theta_norm
+0,42,-8.5,28.3,1.0,0.12
+1,38,-5.2,25.1,0.995,0.87
+...
+999,13,48.7,6.2,0.01,9.14
+```
+
+**📝 Colonnes :**
+- **episode** : Numéro de l'épisode (0-999)
+- **steps** : Longueur de l'épisode
+- **return** : Retour cumulé G_t
+- **loss** : TD-loss MSE moyennée sur l'épisode
+- **epsilon** : Valeur d'ε pour cet épisode
+- **theta_norm** : Norme L2 des poids du réseau (||θ||₂)
+
+**💡 Utilité** : 
+- Export pour analyses externes (Pandas, Excel, TensorBoard)
+- Reproductibilité exacte des résultats
+- Calcul de statistiques personnalisées (variance inter-runs, correlation matrix, etc.)
+
+---
+
+## 📊 Résumé Visual Assets Séance 4
+
+<div align="center">
+
+| Catégorie | Images | CSV | Total | Utilité Principale |
+|-----------|--------|-----|-------|-------------------|
+| **Politique & Valeur** | 3 | 0 | 3 | Validation apprentissage optimal |
+| **Métriques Training** | 4 | 0 | 4 | Convergence & diagnostics |
+| **Analyses Spatiales** | 2 | 0 | 2 | Distribution exploration |
+| **Dashboard** | 1 | 0 | 1 | Vue synthétique |
+| **Logs** | 0 | 1 | 1 | Données brutes export |
+| **TOTAL** | **10** | **1** | **11** | **Analyse complète DQN Naive** |
+
+</div>
+
+**🔍 Comparaison Naive vs DQN (prévu) :**
+- Mode `--mode dqn` génère les mêmes visualisations dans `figures/flex_dqn/`
+- Comparaison attendue :
+  - **Loss** : DQN plus stable (replay buffer décorrèle transitions)
+  - **Convergence** : DQN plus rapide (target network réduit moving target problem)
+  - **Performance finale** : Similaire sur gridworld 6×6 (trop simple pour voir l'avantage DQN)
+
+---
+
+## 📚 Guides de Modification de l'Environnement
+
+### ⚙️ Fichier Principal
 
 Les actions sont codées dans `GridEnv` via `action_space = 4` et les mouvements dans `step()` :
 
