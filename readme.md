@@ -1,9 +1,10 @@
 <div align="center">
 
-<img width="1136" height="236" alt="image" src="https://github.com/user-attachments/assets/f7cd5d72-0302-488f-a16c-be3c91759d97" />
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Reinforcement%20Learning%20%26%20Deep%20RL%20Labs&fontSize=40&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=Portfolio%202025%20-%20Winter%20Semester&descAlignY=52&descAlign=50"/>
 
+<br/>
 
-
+<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4f/Logo_Arts_et_M%C3%A9tiers_ParisTech.svg/1200px-Logo_Arts_et_M%C3%A9tiers_ParisTech.svg.png" alt="ENSAM Meknès" height="80"/>
 
 <br/><br/>
 
@@ -11,6 +12,9 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![Gymnasium](https://img.shields.io/badge/Gymnasium-0.29-00A67E?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+
+[![Visual Assets](https://img.shields.io/badge/Visual_Assets-63_Files-9b59b6?style=for-the-badge)](VISUAL_ANALYSIS.md)
+[![Documentation](https://img.shields.io/badge/Documentation-Complete-2ecc71?style=for-the-badge)](SUMMARY.md)
 
 <br/>
 
@@ -229,7 +233,158 @@ Environnements complexes avec autograder et agents apprenants sophistiqués
 
 </div>
 
-## 📊 Ressources Visuelles et Logs
+## 📊 Ressources Visuelles et Logs - Guide Complet
+
+<div align="center">
+
+### 🎨 Navigation Rapide vers les Analyses Visuelles
+
+[![Catalogue Complet](https://img.shields.io/badge/📖_Catalogue_Complet-63_Fichiers_Analysés-9b59b6?style=for-the-badge)](VISUAL_ANALYSIS.md)
+
+**🔗 [Voir VISUAL_ANALYSIS.md](VISUAL_ANALYSIS.md)** pour le catalogue exhaustif de tous les fichiers visuels avec analyses détaillées et justifications.
+
+</div>
+
+<br/>
+
+<details open>
+<summary><b>📸 Séance 2 - GridWorld Q-Learning (27 Images + 1 CSV)</b></summary>
+
+<table>
+<tr>
+<th>Catégorie</th>
+<th>Nb Files</th>
+<th>Contenu</th>
+<th>Lien</th>
+</tr>
+<tr>
+<td>🎯 <b>LiveQL</b></td>
+<td>7 PNG</td>
+<td>V*, π*, visits, actions, dashboard, explore/exploit</td>
+<td><a href="seance2/minegym#-galerie-complète-des-résultats-visuels">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>📊 <b>Sensitivity Gamma</b></td>
+<td>6 PNG</td>
+<td>Convergence, time-to-threshold, final perf, episode length</td>
+<td><a href="seance2/minegym#-analyse-de-sensibilité-γ-sensitivity_gamma">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>📐 <b>Sensitivity Grid Size</b></td>
+<td>5 PNG</td>
+<td>Impact taille grille (4×4 → 10×10)</td>
+<td><a href="seance2/minegym#-analyse-de-sensibilité-taille-grille-sensitivity_grid_size">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>🧪 <b>Comparaisons Algo</b></td>
+<td>9 PNG + 1 CSV</td>
+<td>TD(0), SARSA, DQN - heatmaps, politiques, convergence</td>
+<td><a href="seance2/minegym#-comparaisons-algorithmiques-exp_td0-exp_sarsa-exp_dqn">🔗 Voir</a></td>
+</tr>
+</table>
+
+**💡 Contenu** : Analyses de sensibilité complètes (γ, grid size), dashboards 6-en-1, heatmaps annotées, comparaisons TD/SARSA/DQN
+
+</details>
+
+<details>
+<summary><b>🤖 Séance 4 - DQN Flexible (10 Images + 1 CSV)</b></summary>
+
+<table>
+<tr>
+<th>Catégorie</th>
+<th>Nb Files</th>
+<th>Contenu</th>
+<th>Lien</th>
+</tr>
+<tr>
+<td>🎯 <b>Politique & Valeur</b></td>
+<td>3 PNG</td>
+<td>V* heatmap, π* grid, policy-value overlay</td>
+<td><a href="Sceance4/minegym#-résultats-globaux---politique--valeurs">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>📈 <b>Training Metrics</b></td>
+<td>4 PNG</td>
+<td>Loss MSE, steps/episode, ε/||θ||, loss vs return</td>
+<td><a href="Sceance4/minegym#-métriques-dentraînement---convergence--diagnostics">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>🗺️ <b>Analyses Spatiales</b></td>
+<td>2 PNG</td>
+<td>Visits heatmap, dominant actions</td>
+<td><a href="Sceance4/minegym#️-analyses-comportementales">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>📊 <b>Dashboard + Logs</b></td>
+<td>1 PNG + 1 CSV</td>
+<td>Summary 6-en-1, naive_logs.csv (episode, loss, return...)</td>
+<td><a href="Sceance4/minegym#-dashboard-récapitulatif">🔗 Voir</a></td>
+</tr>
+</table>
+
+**💡 Contenu** : Comparaison Naive vs DQN complet, courbes de loss/convergence, scatter plots, diagnostics complets
+
+</details>
+
+<details>
+<summary><b>🚀 Séance 5 - PPO Stable-Baselines3 (8 GIFs + 8 Images + CSVs)</b></summary>
+
+<table>
+<tr>
+<th>Catégorie</th>
+<th>Nb Files</th>
+<th>Contenu</th>
+<th>Lien</th>
+</tr>
+<tr>
+<td>🟢 <b>GridWorld Static</b></td>
+<td>3 GIFs + 2 PNG</td>
+<td>50k/100k/400k steps, reward/length curves</td>
+<td><a href="Seance5#-gridworld-statique---évolution-des-métriques">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>🔵 <b>GridWorld Moving</b></td>
+<td>3 GIFs + 4 PNG</td>
+<td>100k/400k/600k steps, comparaison convergence</td>
+<td><a href="Seance5#-gridworld-mobile---apprentissage-adaptatif">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>🔄 <b>Fine-tuning + CartPole</b></td>
+<td>2 GIFs</td>
+<td>Transfert Static→Moving, CartPole solved</td>
+<td><a href="Seance5#-transfert-learning--cartpole">🔗 Voir</a></td>
+</tr>
+<tr>
+<td>📂 <b>Monitor CSVs</b></td>
+<td>~8 CSV</td>
+<td>Logs épisodes (r, l, t) pour analyses custom</td>
+<td><a href="Seance5#-fichiers-csv---monitor-logs">🔗 Voir</a></td>
+</tr>
+</table>
+
+**💡 Contenu** : TensorBoard plots, agents animés (GIFs), comparaison static vs moving, transfer learning
+
+</details>
+
+<br/>
+
+<div align="center">
+
+### 📊 Récapitulatif Global
+
+| Séance | Images PNG | GIFs | CSV | Total | Focus Visuel |
+|--------|-----------|------|-----|-------|-------------|
+| **Seance 2** | 27 | 0 | 1 | 28 | Heatmaps, dashboards, sensibilité |
+| **Seance 4** | 10 | 0 | 1 | 11 | Loss curves, DQN diagnostics |
+| **Seance 5** | 8 | 8 | ~8 | ~24 | TensorBoard, agents animés |
+| **TOTAL** | **45** | **8** | **~10** | **~63** | **Analyses complètes multi-algo** |
+
+</div>
+
+**🔍 Navigation** : Cliquez sur les liens "🔗 Voir" ci-dessus pour accéder directement aux sections détaillées avec analyses et justifications de chaque image.
+
+<br/>
 
 <table>
 <tr>
@@ -269,6 +424,46 @@ TensorBoard logs et<br/>modèles sauvegardés
 2. **Lire** le README spécifique pour le contexte et les commandes
 3. **Visualiser** les figures et GIFs pré-générés
 4. **Re-lancer** les expériences si nécessaire pour de nouveaux paramètres
+
+---
+
+## 📚 Documentation Complète
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="33%">
+<br/>
+<a href="SUMMARY.md">
+<img src="https://img.shields.io/badge/📄_SUMMARY-Résumé_Rapide-3498db?style=for-the-badge"/>
+</a>
+<br/><br/>
+Vue d'ensemble en 1 page<br/>Statistiques et navigation
+<br/><br/>
+</td>
+<td align="center" width="33%">
+<br/>
+<a href="VISUAL_ANALYSIS.md">
+<img src="https://img.shields.io/badge/📖_VISUAL_ANALYSIS-Catalogue_Exhaustif-9b59b6?style=for-the-badge"/>
+</a>
+<br/><br/>
+55 fichiers catalogués<br/>Analyses + justifications
+<br/><br/>
+</td>
+<td align="center" width="33%">
+<br/>
+<a href="RAPPORT_INTEGRATION.md">
+<img src="https://img.shields.io/badge/📋_RAPPORT-Travaux_Réalisés-2ecc71?style=for-the-badge"/>
+</a>
+<br/><br/>
+Méthodologie complète<br/>Checklist + impact
+<br/><br/>
+</td>
+</tr>
+</table>
+
+</div>
 
 ---
 

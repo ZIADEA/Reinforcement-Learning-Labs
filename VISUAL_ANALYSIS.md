@@ -1,4 +1,3 @@
-
 <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=140&section=header&text=Analyse%20Visuelle%20Complète&fontSize=42&fontColor=fff&animation=fadeIn&fontAlignY=38&desc=Catalogue%20des%2063%20Fichiers%20Visuels&descAlignY=55&descAlign=50"/>
