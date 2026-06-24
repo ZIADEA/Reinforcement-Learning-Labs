@@ -4,7 +4,7 @@
 
 <br/>
 
-<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/4/4f/Logo_Arts_et_M%C3%A9tiers_ParisTech.svg/1200px-Logo_Arts_et_M%C3%A9tiers_ParisTech.svg.png" alt="ENSAM Meknès" height="80"/>
+<img width="1136" height="236" alt="LOGO_ENSAM" src="https://github.com/user-attachments/assets/a002a0e0-af94-4fd9-b66b-f2f0000162ba" />
 
 <br/><br/>
 
