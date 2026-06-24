@@ -20,7 +20,7 @@
 
 **Collection de devoirs, labs et expériences documentant mon cours en Reinforcement Learning et Deep RL**  
 **École Nationale Supérieure des Arts et Métiers - Meknès**
-(ps si le prof vous dit que il notera vos depot il ment de ouf . il le fera pas (ps je vais pas dire sont nom pour respect mais cercher le prof de RL de la 4em anne en 2026 ) et bye 
+(ps si le prof vous dit que il notera vos depot il ment de ouf . il le fera pas (ps je vais pas dire sont nom pour respect mais chercher le prof de RL de la 4em anne en 2026 ) et bye 
 </div>
 
 <br/>
