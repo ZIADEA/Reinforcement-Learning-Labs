@@ -38,7 +38,8 @@
 <summary><b>⚙️ 1. Activer l'environnement Python</b></summary>
 
 ```powershell
-& C:\Users\DJERI\VSCODE\Programmation\python\environnements\rl_venv\Scripts\Activate.ps1
+python -m venv rl_venv
+.\rl_venv\Scripts\Activate.ps1
 ```
 </details>
 
